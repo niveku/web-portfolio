@@ -10,6 +10,7 @@ const projects = defineCollection({
     category: z.enum(['Geospatial', 'Data Engineering', 'AI/Automation']),
     stack: z.array(z.string()),
     featured: z.boolean().default(false),
+    repo: z.string().url().optional(),
   }),
 });
 

@@ -35,6 +35,14 @@ const formattedDate = project.data.date.toLocaleDateString('en-US', {
 
     <Content />
 
+    {project.data.repo && (
+      <p>
+        <a href={project.data.repo} rel="noopener noreferrer" target="_blank">
+          Source on GitHub →
+        </a>
+      </p>
+    )}
+
     <footer>
       <a href="/projects">← All projects</a>
     </footer>

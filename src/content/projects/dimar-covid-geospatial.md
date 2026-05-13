@@ -5,6 +5,7 @@ date: 2020-06-01
 category: Geospatial
 stack: ["ArcGIS Online", "Python", "QGIS", "Survey123"]
 featured: false
+repo: https://github.com/niveku/app-vienos-dashboard
 ---
 
 ## Problem
