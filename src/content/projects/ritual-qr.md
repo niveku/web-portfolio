@@ -1,6 +1,6 @@
 ---
 title: "Ritual QR Puzzle"
-summary: "Duplex fold-and-backlight QR puzzle generator. Print, fold, hold to a lamp — the hidden QR resolves."
+summary: "Duplex fold-and-backlight QR puzzle generator. Print it, fold it, hold it to a lamp, and the hidden QR resolves."
 date: 2026-04-12
 category: AI/Automation
 stack: ["Python", "Pillow", "qrcode", "ReportLab", "OpenCV"]
@@ -10,16 +10,16 @@ repo: https://github.com/niveku/app-ritual-qr
 
 ## Concept
 
-A QR code that only exists when the paper is folded the right way and held against a light source. The front and back of a duplex print each carry half of the pattern; alignment, transparency, and backlight do the rest. The result is a physical artefact that doubles as a puzzle — readable to anyone who follows the ritual, opaque to anyone who doesn't.
+A QR code that only exists when you fold the paper the right way and hold it against a light source. The front and back of a duplex print each carry half of the pattern. Fold the sheet so the two halves register, and the backlight bleeds them into one readable code. The artefact doubles as a puzzle: follow the fold ritual and your phone scans it, skip the ritual and the page stays noise.
 
 ## Calibration Workflow
 
-Home printers have duplex drift — front and back almost never align perfectly. The generator includes a calibration mode that prints registration marks, asks the user to measure the offset, and bakes the correction into the final output. Paper weight matters too: too thick and the backlight fails, too thin and the surface print shows through. The calibration step covers both.
+Home printers drift on duplex jobs, so the front and back rarely land in register. A calibration mode prints registration marks, you measure the offset, and the generator bakes the correction into the final layout. Paper weight changes the result. Too thick and the backlight can't pass through, too thin and the surface print shows on the other side. Calibration sets a target weight and flags when your stock falls outside it.
 
 ## QA Pipeline
 
-Each generated artwork is validated before printing: OpenCV simulates the fold-and-backlight composite digitally, then a virtual scanner attempts to decode the result. If the simulated decode fails, the layout is rejected and regenerated. This catches the most common failure modes — payload too dense, fold line crossing a finder pattern, contrast too low — before paper is wasted.
+The generator validates every artwork before you print it. OpenCV composites the fold and backlight in software, then a virtual scanner tries to decode the result. When the simulated decode fails, the pipeline rejects the layout and regenerates it. The check catches the failures that waste paper: a payload too dense to resolve, a fold line crossing a finder pattern, contrast too low for the backlight to separate.
 
 ## Outcome
 
-A working generator that turns arbitrary QR payloads into print-ready, calibrated, QA-passed PDFs. The project is small but unusually fun: it sits at the boundary of generative design, optics, and physical interaction — and every step has a verifiable success criterion.
+A working generator that turns any QR payload into a calibrated, QA-passed, print-ready PDF. The build stayed small because every step had a pass/fail to check: the registration marks line up or they don't, and the virtual scanner either decodes the artwork or rejects it. The design problem sits where generative layout meets backlight optics, and the output is a sheet of paper you hold to a lamp.

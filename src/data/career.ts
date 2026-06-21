@@ -155,7 +155,7 @@ export const career: Career = {
     headline:
       'Geospatial Data Engineer | Geoscientist | Python · AWS · GIS · Scientific Software · AI Workflows',
     tagline:
-      'Geospatial data engineer and geoscientist building spatial data pipelines, GIS systems, and AWS workflows — from Bogotá, remote-first.',
+      'Geospatial data engineer and geoscientist building spatial data pipelines, GIS systems, and AWS workflows. Bogotá, remote-first.',
     location: 'Bogotá, Colombia',
     remote: true,
     // Public contact email. Confirm before launch (was previously hello@niveku.dev).
@@ -176,13 +176,13 @@ export const career: Career = {
           key: 'geospatial',
           label: 'Geospatial Data Engineering',
           blurb:
-            'Geosciences-trained data engineer who keeps the spatial lens front and center — GIS systems, ArcGIS dashboards, and Python/Dash apps built on a real geoscience foundation.',
+            'Geosciences-trained data engineer who keeps the spatial lens in front: GIS systems, ArcGIS dashboards, and Python/Dash apps built on a geoscience foundation.',
         },
         {
           key: 'dataEngineering',
           label: 'Data Engineering',
           blurb:
-            'Production AWS pipelines — Lambda, Glue, Step Functions, Textract — and document-AI workflows for CPG, retail, and government clients.',
+            'Production AWS pipelines (Lambda, Glue, Step Functions, Textract) and document-AI workflows for CPG, retail, and government clients.',
         },
         {
           key: 'productOperator',
@@ -194,19 +194,19 @@ export const career: Career = {
           key: 'aiAutomation',
           label: 'AI Workflow & Automation',
           blurb:
-            'Building AI/LLM workflow tooling — agents, MCPs, and personal automation — on the Claude/Anthropic stack.',
+            'Building AI/LLM workflow tooling on the Claude/Anthropic stack: agents, MCPs, and personal automation.',
         },
       ],
     },
     summaries: {
       geospatial:
-        'Geospatial data engineer and geoscientist with 8+ years building spatial systems end-to-end — from field data and resource models to ArcGIS Online dashboards, Python/Dash applications, and AWS data pipelines. He pairs a BSc in Geosciences with practical GIS depth across QGIS, the ArcGIS suite, GeoPandas, PostGIS, and GDAL, and has shipped geospatial work used by mining, government, and operations teams. Highlights include the first 3D geological model of the Coscuez emerald deposit and, for the Colombian Maritime Authority (DIMAR), a Survey123 + GeoPandas COVID monitoring workflow, ArcGIS web apps and dashboards, and the open-source ViENOS oceanographic ENSO monitoring dashboard. He is strongest at turning environmental, geological, and spatial data into decision-oriented outputs for technical, institutional, and community-facing audiences, and acts as architect-in-practice when scope is ambiguous.',
+        'Geospatial data engineer and geoscientist with 8+ years building spatial systems end to end, from field data and resource models to ArcGIS Online dashboards, Python/Dash applications, and AWS data pipelines. He pairs a BSc in Geosciences with GIS depth across QGIS, the ArcGIS suite, GeoPandas, PostGIS, and GDAL, and has shipped geospatial work used by mining, government, and operations teams. The record includes the first 3D geological model of the Coscuez emerald deposit and, for the Colombian Maritime Authority (DIMAR), a Survey123 + GeoPandas COVID monitoring workflow, ArcGIS web apps and dashboards, and the open-source ViENOS oceanographic ENSO monitoring dashboard. He turns environmental, geological, and spatial data into decision-oriented outputs for technical, institutional, and community-facing audiences, and takes the architect role in practice when scope is ambiguous.',
       dataEngineering:
-        'Data engineer with 8+ years building production data systems on AWS — Lambda, Glue, Step Functions, Textract, Redshift, Athena, DynamoDB — for clients in CPG, retail, and government. At Arkho he led architecture and implementation of the AB InBev invoice-PDF pipeline across 30–40 supplier formats (Textract + Lambda + Step Functions), built the Casaideas SAP-to-cloud pipelines (Glue, PySpark, S3) with traceable lineage and end-to-end observability, contributed to Coca-Cola Chile distribution ETL under quality-gated DevOps, and deployed projects to AWS with CDK and infrastructure-as-code practices. He is strong on document AI and pipeline orchestration, comfortable acting as architect when requirements are vague, and his geosciences background gives him an unusual fit for spatial and scientific data domains.',
+        'Data engineer with 8+ years building production data systems on AWS (Lambda, Glue, Step Functions, Textract, Redshift, Athena, DynamoDB) for clients in CPG, retail, and government. At Arkho he led architecture and implementation of the AB InBev invoice-PDF pipeline across 30–40 supplier formats (Textract + Lambda + Step Functions), built the Casaideas SAP-to-cloud pipelines (Glue, PySpark, S3) with traceable lineage and end-to-end observability, contributed to Coca-Cola Chile distribution ETL under quality-gated DevOps, and deployed projects to AWS with CDK and infrastructure-as-code practices. He handles document AI and pipeline orchestration, takes the architect role when requirements are vague, and brings a geosciences background that fits spatial and scientific data domains.',
       productOperator:
-        'Hybrid product owner and Python/AWS engineer who is comfortable holding scope, code, and stakeholders at once. As Geoscience Software Specialist at Imaged Reality (UK, remote), he leads technical product delivery for enterprise oil and gas clients on the Stratbox platform — running product onboardings, advancing pilots to active accounts, designing the Jira bug-reporting process, and bridging product, QA, and client communication by translating geoscience workflows into specs and engineering priorities. Earlier, as a data engineer at Arkho, he acted as architect-in-practice on AB InBev and Coca-Cola data initiatives. He is effective in early-stage and ambiguous environments, turning unclear requirements into testable designs and explaining engineering tradeoffs to stakeholders in plain language.',
+        'Hybrid product owner and Python/AWS engineer who holds scope, code, and stakeholders at once. As Geoscience Software Specialist at Imaged Reality (UK, remote), he leads technical product delivery for enterprise oil and gas clients on the Stratbox platform: running product onboardings, advancing pilots to active accounts, designing the Jira bug-reporting process, and bridging product, QA, and client communication by translating geoscience workflows into specs and engineering priorities. Earlier, as a data engineer at Arkho, he took the architect role in practice on AB InBev and Coca-Cola data initiatives. He works well in early-stage and ambiguous environments, turning unclear requirements into testable designs and framing engineering tradeoffs in terms stakeholders can act on.',
       aiAutomation:
-        'Builds AI and LLM workflow tooling on the side — agents, MCPs, and personal automation on the Claude/Anthropic stack — extending a track record of turning ambiguous problems into working systems. The practice complements his production engineering experience, including a supervised Random Forest facies classification pipeline and an extension to the Stratbox Python API for depth-referenced data extraction. He is co-author of "Automating Core Data Integration: Insights from the Volve Field Case Study" (SPE OnePetro, ADIPEC 2025).',
+        'Builds AI and LLM workflow tooling on the side: agents, MCPs, and personal automation on the Claude/Anthropic stack, extending a track record of turning ambiguous problems into working systems. The practice sits alongside his production engineering work, which includes a supervised Random Forest facies classification pipeline and an extension to the Stratbox Python API for depth-referenced data extraction. He is co-author of "Automating Core Data Integration: Insights from the Volve Field Case Study" (SPE OnePetro, ADIPEC 2025).',
     },
   },
 
@@ -227,7 +227,7 @@ export const career: Career = {
         'Co-authored an SPE paper at ADIPEC 2025: "Automating Core Data Integration: Insights from the Volve Field Case Study" (Borya, A., Henao, K., Ruiz-Graham, C.; SPE OnePetro D041S138R004)',
         'Ran client onboardings and supported pilots advancing to active accounts',
         'Supported simultaneous enterprise accounts in the oil & gas sector',
-        'Used GIS/spatial analysis continuously for product support, analysis, and product design',
+        'Used GIS/spatial analysis throughout product support, analysis, and product design',
       ],
       stack: ['Python', 'JavaScript', 'C#', 'Unity', 'scikit-learn', 'pandas', 'numpy', 'AWS', 'PostgreSQL', 'QGIS', 'Jira', 'Confluence', 'Git'],
       clients: [],
@@ -241,11 +241,11 @@ export const career: Career = {
       location: 'Remote (Chile)',
       type: 'Full-time',
       summary:
-        'Cloud data engineer at a Chilean technology consultancy, delivering end-to-end AWS data pipelines and warehouse flows directly to enterprise clients across retail, beverage/logistics, and document-processing use cases, with direct stakeholder communication and DevOps quality gates.',
+        'Cloud data engineer at a Chilean technology consultancy, delivering end-to-end AWS data pipelines and warehouse flows to enterprise clients across retail, beverage/logistics, and document-processing use cases, with direct stakeholder communication and DevOps quality gates.',
       highlights: [
         'Built and optimized end-to-end AWS data pipelines for Casaideas, moving complex SAP retail data into cloud staging and warehouse layers to support inventory, sales, and stock analysis',
         'Designed raw, staging, and warehouse data flows using AWS Glue, PySpark, Athena, Redshift, and CloudWatch, improving traceability, monitoring, and downstream Power BI consumption',
-        'Acted as the practical architect for an AB InBev invoice automation solution, processing highly variable supplier PDFs using Textract, Lambda, Step Functions, SQS, and curated storage layers',
+        'Acted as the practical architect for an AB InBev invoice automation solution, processing wide-ranging supplier PDF formats using Textract, Lambda, Step Functions, SQS, and curated storage layers',
         'Contributed to Coca-Cola Chile data initiatives involving stock, logistics, and ingestion workflows under strict code-quality, security, coverage, and maintainability requirements',
         'Managed delivery workflows using GitHub Actions, AWS CDK, CloudFormation, and AWS CLI, supporting automated deployments and least-privilege IAM patterns',
         'Implemented benchmark- and cost-driven improvements across AWS workflows under enterprise constraints',
@@ -523,13 +523,13 @@ export const career: Career = {
   },
 
   softSkills: [
-    'Ownership / acting-architect — drives architecture decisions and end-to-end delivery without holding the formal title',
-    'Proactivity — designs processes and solutions before being asked',
-    'Ambiguity handling — operates well when requirements are unclear or data is messy; iterates via clarification loops',
-    'Technical-to-business bridging — frames engineering tradeoffs (cost, risk, time-to-value) in terms stakeholders can act on',
-    'Client-facing delivery — owns client relationships through scoping, demos, and incident resolution',
-    'Communication — translates complex technical/scientific information into outputs the right audience can act on',
-    'Cross-cultural async collaboration — Colombia / Chile / UK working norms, written-first, distributed-by-default',
+    'Ownership / acting-architect: drives architecture decisions and end-to-end delivery without holding the formal title',
+    'Proactivity: designs processes and solutions before being asked',
+    'Ambiguity handling: operates well when requirements are unclear or data is messy; iterates via clarification loops',
+    'Technical-to-business bridging: frames engineering tradeoffs (cost, risk, time-to-value) in terms stakeholders can act on',
+    'Client-facing delivery: owns client relationships through scoping, demos, and incident resolution',
+    'Communication: translates complex technical/scientific information into outputs the right audience can act on',
+    'Cross-cultural async collaboration: Colombia / Chile / UK working norms, written-first, distributed-by-default',
   ],
 
   education: [
@@ -596,7 +596,7 @@ export const career: Career = {
     { repoSlug: 'casaideas-sap-pipeline', achievementId: 'arkho-casaideas-sap-pipeline', matched: true, oneLiner: 'Built key stages of an end-to-end SAP-to-cloud pipeline (Glue, PySpark, S3) migrating daily SAP extracts into a traceable analytics layer for retailer Casaideas.' },
     { repoSlug: 'cocacola-distribution', achievementId: 'arkho-cocacola-distribution', matched: true, oneLiner: "Data engineering contributor on Coca-Cola Chile's distribution and logistics ETL flows, delivered under quality-gated DevOps (SonarQube, GitHub Actions) with direct client interaction." },
     { repoSlug: 'dimar-covid-geospatial', achievementId: 'dimar-covid-dashboard', matched: true, oneLiner: "Designed and shipped an end-to-end COVID geospatial monitoring workflow (ArcGIS Online, Survey123, GeoPandas) for Colombia's national maritime authority DIMAR." },
-    { repoSlug: 'fura-reporting-maps', achievementId: 'fura-reporting-maps', matched: true, oneLiner: "Owned geospatial information production and audience-calibrated cartographic reporting (QGIS, Python) for Fura's emerald operations — investor, environmental, and licensing maps." },
+    { repoSlug: 'fura-reporting-maps', achievementId: 'fura-reporting-maps', matched: true, oneLiner: "Owned geospatial information production and audience-calibrated cartographic reporting (QGIS, Python) for Fura's emerald operations: investor, environmental, and licensing maps." },
     { repoSlug: 'housing-simulator', matched: false, oneLiner: 'Personal Streamlit app comparing rent-vs-buy housing scenarios for the Colombian market with ROI metrics; no matching enterprise achievement in source data.' },
     { repoSlug: 'openclaw', matched: false, oneLiner: 'Personal AI automation system built on Claude Code, MCPs, and custom skills; relates to the aiAutomation positioning but has no discrete source achievement.' },
     { repoSlug: 'research-first', matched: false, oneLiner: 'Personal Claude Code skill that forces agents to find existing tools and libraries before building from scratch; no matching enterprise achievement in source data.' },

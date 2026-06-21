@@ -5,11 +5,11 @@ date: 2026-05-13
 tags: ["github", "portfolio", "engineering-practice", "meta"]
 ---
 
-A personal GitHub account drifts. You spin up a repo to test an idea, name it whatever, and move on. Multiply that by a few years and the profile reads less like a portfolio and more like a junk drawer. I finally cleaned mine up. Here's the system.
+You spin up a repo to test an idea, name it whatever, and move on. Do that across a few years and your profile reads like a junk drawer. I cleaned mine up. Below is the system I landed on.
 
 ## The mess
 
-The symptoms were predictable: names like `test2` and `final-version`, half of them with no README, some private things that should have been public and one public thing that should have been private. A recruiter landing on that profile learns nothing except that I don't tidy up.
+Names like `test2` and `final-version`, half the repos with no README, a few private projects that should have been public and one public repo that should have been private. A recruiter who lands on that profile learns one thing: I don't tidy up.
 
 ## Goals
 
@@ -17,7 +17,7 @@ Three, in order:
 
 1. A stranger can tell what each repo *is* from the name alone.
 2. The public set tells a coherent story; the private set holds the rest without leaking.
-3. The convention is cheap enough that I'll actually follow it next time.
+3. The convention is cheap enough that I'll follow it on the next repo, not abandon it.
 
 ## Convention: `<scope>-<what>`
 
@@ -25,15 +25,15 @@ Every repo name is a scope, a hyphen, and a short description of the thing. `app
 
 ### Scope registry
 
-The scopes are a small, closed set so they stay meaningful: `app` for runnable applications, `tool` for single-purpose CLIs and scripts, `web` for sites, `skill` for reusable AI/automation pieces, `study` for learning projects I'm not pretending are production. A closed list is the point — the moment you allow a new scope per repo, the scope means nothing.
+The scopes are a small, closed set so they stay meaningful: `app` for runnable applications, `tool` for single-purpose CLIs and scripts, `web` for sites, `skill` for reusable AI/automation pieces, `study` for learning projects I'm not pretending are production. Keep the list closed. Allow a new scope per repo and the scope stops carrying any information.
 
 ### Forbidden suffixes
 
-`-final`, `-v2`, `-new`, `-test`, `-copy`. Git already tracks versions; the name shouldn't. If a rewrite is genuinely a different project, it gets a different `what`, not a suffix.
+`-final`, `-v2`, `-new`, `-test`, `-copy`. Git already tracks versions; the name shouldn't. If a rewrite is a different project, it gets a different `what`, not a suffix.
 
 ## README pattern
 
-Every public repo gets the same opening: one sentence on what it is, a short "why it exists," how to run it, and the stack. The first sentence is the most valuable real estate on the page — it's what shows up in search and previews — so it states the thing plainly instead of warming up to it.
+Every public repo gets the same opening: one sentence on what it is, a short "why it exists," how to run it, and the stack. The first sentence shows up in search results and link previews, so I make it state the thing plainly. No warming up.
 
 ## Archive vs delete
 
@@ -41,7 +41,7 @@ Default to **archive**, not delete. Archiving keeps the history readable and the
 
 ## AI guidance leakage
 
-The trap of working with AI coding tools: instruction files (`CLAUDE.md` and similar) and local config can carry personal notes, paths, or workflow details you didn't mean to publish. Two rules now: those files are git-ignored in public repos, and — the part people miss — **deleting a file in a later commit does not remove it from history**. If something sensitive ever landed in a public repo, the only real fix is rewriting history or recreating the repo clean.
+Instruction files (`CLAUDE.md` and similar) and local config carry personal notes, paths, or workflow details you didn't mean to publish. I follow two rules now. Those files stay git-ignored in public repos. And **deleting a file in a later commit does not remove it from history**. If something sensitive ever landed in a public repo, you rewrite history or recreate the repo clean. There is no softer fix.
 
 ## What I'd do differently
 

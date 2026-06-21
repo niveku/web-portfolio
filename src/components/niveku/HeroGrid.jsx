@@ -1,43 +1,33 @@
-/* Hero — Geospatial Grid (interactive island, client:idle).
-   A dark stylized world-grid with Bogotá as the anchor and pulsing data points
-   that reference real projects. Contours are precomputed at build and passed in.
-   The rotating pulse pauses off-screen / when the tab is hidden / under
-   prefers-reduced-motion. The map itself is decorative (aria-hidden); the same
-   information is available as text in the hero copy and Projects section. */
+/* Hero — Geospatial Career Graph (interactive island, client:idle).
+   A dark stylized field with Bogotá as the anchor and ~36 nodes derived from the
+   career source of truth (see mapGraph.js), grouped into four domain clusters.
+   Hover or the rotating pulse reveals a refined one-line fact per node. The
+   rotation pauses off-screen / when the tab is hidden / under prefers-reduced-motion.
+   The map is decorative (aria-hidden); the same facts live as text in the hero
+   copy and the Projects/About/Strata sections. */
 
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { buildContours } from './contours.js';
+import { buildGraph, GROUP_LABEL } from './mapGraph.js';
 import { STATS } from './data.js';
-
-// Project nodes as lat/lon mapped onto a normalized canvas.
-// Positions are artistic — not cartographically accurate — but anchor Bogotá.
-const NODES = [
-  { id: 'bogota', label: 'Bogotá · base', x: 28, y: 58, size: 14, accent: 'magenta', primary: true, kana: '拠点' },
-  { id: 'openclaw', label: 'OpenClaw', x: 22, y: 42, size: 10, accent: 'magenta', kana: '自動化' },
-  { id: 'abinbev', label: 'AB InBev', x: 48, y: 34, size: 9, accent: 'violet', kana: '請求書' },
-  { id: 'coca', label: 'Coca-Cola Chile', x: 32, y: 82, size: 9, accent: 'cyan', kana: '物流' },
-  { id: 'casa', label: 'Casaideas', x: 38, y: 74, size: 8, accent: 'amber', kana: '倉庫' },
-  { id: 'dimar', label: 'DIMAR', x: 20, y: 66, size: 8, accent: 'cyan', kana: '海' },
-  { id: 'fura', label: 'Fura', x: 26, y: 52, size: 8, accent: 'magenta', kana: '地質' },
-  { id: 'adipec', label: 'ADIPEC 2025', x: 72, y: 44, size: 8, accent: 'amber', kana: '論文' },
-];
-
-const accentColor = {
-  magenta: 'oklch(0.72 0.25 340)',
-  violet: 'oklch(0.72 0.20 300)',
-  cyan: 'oklch(0.85 0.14 200)',
-  amber: 'oklch(0.82 0.15 75)',
-};
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function HeroGrid({ contours: propContours }) {
+function HeroGrid({ contours: propContours, graph: propGraph }) {
   const [hover, setHover] = useState(null);
   const [tick, setTick] = useState(0);
   const rootRef = useRef(null);
+
+  // Graph: use the build-time prop; fall back to a client build only if absent.
+  // Both paths are deterministic, so they produce identical coordinates.
+  const graph = useMemo(
+    () => (propGraph && propGraph.nodes ? propGraph : buildGraph()),
+    [propGraph],
+  );
+  const { nodes, edges, primaries, counts } = graph;
 
   // Pause the rotating pulse when off-screen, when the tab is hidden, or under
   // reduced motion — avoids needless main-thread work and respects a11y.
@@ -47,7 +37,7 @@ function HeroGrid({ contours: propContours }) {
     let visible = true;
     let timer = null;
     const start = () => {
-      if (timer == null) timer = setInterval(() => setTick((t) => t + 1), 2200);
+      if (timer == null) timer = setInterval(() => setTick((t) => t + 1), 2600);
     };
     const stop = () => {
       if (timer != null) {
@@ -74,8 +64,7 @@ function HeroGrid({ contours: propContours }) {
     };
   }, []);
 
-  // Topographic contours: use the build-time precomputed set; fall back to
-  // client-side generation only if none were provided.
+  // Topographic contours: build-time precomputed set, with a client fallback.
   const contours = useMemo(
     () =>
       propContours && propContours.length
@@ -84,7 +73,17 @@ function HeroGrid({ contours: propContours }) {
     [propContours],
   );
 
-  const activeIdx = tick % NODES.length;
+  // The active node is whatever the cursor is on, else the current rotation pick.
+  const rotatingId = primaries[tick % primaries.length];
+  const activeId = hover || rotatingId;
+  const activeNode = useMemo(
+    () => nodes.find((n) => n.id === activeId) || nodes[0],
+    [nodes, activeId],
+  );
+
+  const anchor = useMemo(() => nodes.find((n) => n.id === 'bogota'), [nodes]);
+  const ax = anchor ? anchor.x : 30;
+  const ay = anchor ? anchor.y : 55;
 
   return (
     <div className="hero-grid rise-1" ref={rootRef}>
@@ -97,9 +96,9 @@ function HeroGrid({ contours: propContours }) {
           </h1>
           <p className="hero-para">
             I build <em>spatial data pipelines</em>, <em>GIS systems</em>, and
-            <em> AWS data infrastructure</em> — turning domain-heavy, ambiguous
-            problems into working systems. 8+ years across geosciences, geospatial
-            engineering, and <strong className="neon-cyan">AI-assisted automation</strong>.
+            <em> AWS data infrastructure</em>. 8+ years turning domain-heavy,
+            ambiguous problems into systems that ship, across geosciences,
+            geospatial engineering, and <strong className="neon-cyan">AI-assisted automation</strong>.
             Remote-first from Bogotá.
           </p>
           <div className="hero-ctas">
@@ -131,18 +130,18 @@ function HeroGrid({ contours: propContours }) {
               <span style={{ background: 'var(--cyan)' }} />
             </div>
             <div className="term-title">
-              <span className="kana">地図</span>
-              <span>spatial-ops · live feed</span>
+              <span className="kana">経歴</span>
+              <span>career-graph · live feed</span>
             </div>
-            <div className="term-meta"><span className="led" /> 8 nodes · GMT-5</div>
+            <div className="term-meta"><span className="led" /> {nodes.length} nodes · GMT-5</div>
           </div>
 
           <div className="grid-canvas">
             <svg className="grid-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
               <defs>
-                <radialGradient id="g-glow" cx="28%" cy="58%" r="60%">
-                  <stop offset="0%" stopColor="oklch(0.55 0.25 335)" stopOpacity="0.55" />
-                  <stop offset="60%" stopColor="oklch(0.40 0.20 300)" stopOpacity="0.15" />
+                <radialGradient id="g-glow" cx="30%" cy="55%" r="62%">
+                  <stop offset="0%" stopColor="oklch(0.55 0.25 335)" stopOpacity="0.5" />
+                  <stop offset="60%" stopColor="oklch(0.40 0.20 300)" stopOpacity="0.14" />
                   <stop offset="100%" stopColor="transparent" stopOpacity="0" />
                 </radialGradient>
                 <linearGradient id="g-line" x1="0" y1="0" x2="1" y2="1">
@@ -152,57 +151,64 @@ function HeroGrid({ contours: propContours }) {
               </defs>
               <rect width="100" height="100" fill="url(#g-glow)" />
               {Array.from({ length: 19 }, (_, i) => (
-                <line key={`v${i}`} x1={(i + 1) * 5} y1="0" x2={(i + 1) * 5} y2="100" stroke="oklch(0.55 0.10 300)" strokeOpacity="0.14" strokeWidth="0.12" />
+                <line key={`v${i}`} x1={(i + 1) * 5} y1="0" x2={(i + 1) * 5} y2="100" stroke="oklch(0.55 0.10 300)" strokeOpacity="0.12" strokeWidth="0.12" />
               ))}
               {Array.from({ length: 19 }, (_, i) => (
-                <line key={`h${i}`} x1="0" y1={(i + 1) * 5} x2="100" y2={(i + 1) * 5} stroke="oklch(0.55 0.10 300)" strokeOpacity="0.14" strokeWidth="0.12" />
+                <line key={`h${i}`} x1="0" y1={(i + 1) * 5} x2="100" y2={(i + 1) * 5} stroke="oklch(0.55 0.10 300)" strokeOpacity="0.12" strokeWidth="0.12" />
               ))}
               <g fill="none" stroke="oklch(0.78 0.18 340)" strokeLinecap="round">
                 {contours.map((c, i) => (
                   <path
                     key={i}
                     d={c.d}
-                    strokeOpacity={0.18 + (i % 4) * 0.06}
-                    strokeWidth={i % 5 === 0 ? 0.22 : 0.12}
+                    strokeOpacity={0.14 + (i % 4) * 0.05}
+                    strokeWidth={i % 5 === 0 ? 0.2 : 0.1}
                     stroke={i % 7 === 0 ? 'oklch(0.82 0.14 200)' : i % 11 === 0 ? 'oklch(0.82 0.15 75)' : 'oklch(0.78 0.18 340)'}
                   />
                 ))}
               </g>
-              {NODES.map((n, i) => ({ n, i }))
-                .filter(({ n }) => !n.primary)
-                .map(({ n, i }) => (
+              {edges.map((e, i) => {
+                const on = e.source === activeId || e.target === activeId;
+                const backbone = e.type === 'backbone';
+                return (
                   <line
-                    key={n.id}
-                    x1="28" y1="58" x2={n.x} y2={n.y}
+                    key={`${e.source}-${e.target}-${i}`}
+                    x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2}
                     stroke="url(#g-line)"
-                    strokeOpacity={activeIdx === i ? 0.9 : 0.25}
-                    strokeWidth={activeIdx === i ? 0.35 : 0.15}
-                    strokeDasharray="0.8 0.8"
-                    style={{ transition: 'all 0.6s ease' }}
+                    strokeOpacity={on ? 0.85 : backbone ? 0.22 : 0.1}
+                    strokeWidth={on ? 0.38 : backbone ? 0.16 : 0.09}
+                    strokeDasharray={backbone ? '0.9 0.9' : '0.5 0.7'}
+                    style={{ transition: 'all 0.5s ease' }}
                   />
-                ))}
+                );
+              })}
             </svg>
 
-            {NODES.map((n, i) => {
-              const isActive = activeIdx === i || hover === n.id;
+            {nodes.map((n) => {
+              const isActive = activeId === n.id;
+              const isAnchor = n.type === 'anchor';
+              const showLabel = isActive || isAnchor;
               return (
                 <div
                   key={n.id}
-                  className={`node ${n.primary ? 'primary' : ''} ${isActive ? 'active' : ''}`}
-                  style={{ left: `${n.x}%`, top: `${n.y}%`, '--node-color': accentColor[n.accent], '--node-size': `${n.size}px` }}
+                  className={`node ${isAnchor ? 'primary' : ''} ${isActive ? 'active' : ''} ${n.x > 58 ? 'label-left' : ''}`}
+                  style={{ left: `${n.x}%`, top: `${n.y}%`, '--node-color': n.color, '--node-size': `${n.size}px` }}
                   onMouseEnter={() => setHover(n.id)}
                   onMouseLeave={() => setHover(null)}
                 >
                   <span className="node-ring" />
                   <span className="node-dot" />
-                  {(isActive || n.primary) && (
-                    <span className="node-label"><span className="node-label-text">{n.label}</span></span>
+                  {showLabel && (
+                    <span className="node-label">
+                      <span className="node-label-text">{n.label}</span>
+                      {n.meta && <span className="node-meta">{n.meta}</span>}
+                    </span>
                   )}
                 </div>
               );
             })}
 
-            <div className="crosshair" style={{ left: '28%', top: '58%' }}>
+            <div className="crosshair" style={{ left: `${ax}%`, top: `${ay}%` }}>
               <div className="cross-ring" />
               <div className="cross-ring big" />
             </div>
@@ -212,12 +218,17 @@ function HeroGrid({ contours: propContours }) {
               <div className="hud-line"><span className="hud-k">LON</span> 74.0721° W</div>
               <div className="hud-line"><span className="hud-k">TZ</span>  GMT-5</div>
             </div>
-            <div className="hud hud-br">
-              <div className="hud-line"><span className="led" /> signal · live</div>
+            <div className="hud hud-tr map-legend">
+              {Object.keys(GROUP_LABEL).map((g) => (
+                <div className="hud-line" key={g}>
+                  <span className="legend-dot" style={{ background: `var(--${g === 'geo' ? 'cyan' : g === 'data' ? 'violet' : g === 'product' ? 'amber' : 'magenta'})` }} />
+                  {GROUP_LABEL[g]} <span className="legend-n">{counts[g]}</span>
+                </div>
+              ))}
             </div>
             <div className="hud hud-bl">
-              <div className="hud-line"><span className="hud-k">NODES</span> {NODES.length}</div>
-              <div className="hud-line"><span className="hud-k">ACTIVE</span> {NODES[activeIdx].label}</div>
+              <div className="hud-line"><span className="hud-k">NODE</span> {activeNode.label}</div>
+              {activeNode.meta && <div className="hud-line hud-sub">{activeNode.meta}</div>}
             </div>
           </div>
         </div>

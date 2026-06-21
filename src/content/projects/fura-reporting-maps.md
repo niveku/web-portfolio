@@ -9,11 +9,11 @@ featured: false
 
 ## The problem: audience-calibrated maps for mining reports
 
-Fura Gems, a Colombian emerald exploration and mining company, needed reliable, audience-calibrated maps and geospatial information for multiple formal reporting contexts: investor-facing technical reports, environmental licensing submissions, and regulatory compliance documentation. Each audience required different spatial content, projection standards, and cartographic conventions.
+Fura Gems, a Colombian emerald exploration and mining company, needed accurate maps and geospatial information for several formal reporting contexts: investor-facing technical reports, environmental licensing submissions, and regulatory compliance documentation. Each audience required different spatial content, projection standards, and cartographic conventions.
 
 ## My role: owner of geospatial reporting
 
-I owned map production and geospatial information management for the reporting function. This was not a support role — I was the single point of accountability for geospatial deliverables across all reporting contexts.
+I owned map production and geospatial information management for the reporting function. I was the single point of accountability for geospatial deliverables across investor, environmental, and licensing contexts.
 
 ## What I built: a managed GIS base and QGIS map series
 
@@ -25,4 +25,4 @@ I owned map production and geospatial information management for the reporting f
 
 ## Outcome: maps on time, plus a first resource estimation
 
-Maps delivered on time for every reporting cycle across investor relations, environmental licensing, and regulatory submissions. The work also contributed to Fura's first formal Colombian emerald resource estimation — a technically rigorous document I co-authored applying Colombian mining reporting standards.
+Maps shipped on time for each reporting cycle across investor relations, environmental licensing, and regulatory submissions. The same GIS base supported Fura's first formal Colombian emerald resource estimation, where I contributed to the geological reporting under Colombian mining reporting standards.

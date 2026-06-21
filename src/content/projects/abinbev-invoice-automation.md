@@ -9,11 +9,11 @@ featured: true
 
 ## The problem: 30+ invoice formats, no automated path
 
-AB InBev received invoices from 30+ suppliers in highly variable PDF formats — different layouts, numeric conventions, partially handwritten fields, and inconsistent structure. Downstream business systems needed clean, normalized data. There was no automated path from raw PDFs to structured records.
+AB InBev received invoices from more than 30 suppliers, and each supplier used its own PDF layout. Downstream business systems needed clean, normalized records. No automated path existed from raw PDF to structured data.
 
 ## My role: acting architect
 
-I was the implementation lead and acting architect in practice. I took the initial requirement — "extract and normalize invoice data" — and drove it from requirements clarification through architecture decisions, PDF readability improvements, cost-aware design, and testing-oriented delivery.
+I led the implementation and held the architecture in practice. The brief was one line: extract and normalize invoice data. I clarified the requirements, chose the AWS services, designed the preprocessing that made difficult PDFs readable to OCR, sized the workload against Textract's per-page cost, and wrote tests around the extraction logic.
 
 ## What I built: a serverless AWS pipeline
 
@@ -22,12 +22,12 @@ A fully serverless pipeline on AWS:
 - **Ingest:** PDFs land in S3, triggering a Lambda function.
 - **Extraction:** AWS Textract handles OCR and structured field extraction.
 - **Orchestration:** Step Functions coordinate the extraction, validation, and retry flow.
-- **Queue:** SQS decouples ingestion from downstream processing for resilience.
-- **Storage:** DynamoDB holds normalized records; S3 retains originals.
-- **Observability:** CloudWatch alarms and logs for operational visibility.
+- **Queue:** SQS sits between ingestion and processing, so a downstream stall does not block new uploads.
+- **Storage:** DynamoDB holds the normalized records; S3 retains the original PDFs.
+- **Observability:** CloudWatch alarms and logs report failures for review.
 
-I also ran a benchmark phase to quantify extraction accuracy across provider types before committing to the architecture, and designed preprocessing steps to improve PDF readability for challenging formats.
+Before I committed to the architecture, I benchmarked extraction accuracy across supplier types, then added preprocessing steps that made the harder PDFs readable to Textract.
 
-## Outcome: structured invoice data at scale
+## Outcome: structured invoice data from 30–40 formats
 
-The pipeline handled invoices from roughly 30–40 supplier types. The architecture was cost-aware (Textract is priced per page — batch sizing and preprocessing reduced unnecessary spend). Ambiguous formats were flagged for human review rather than silently dropped.
+The pipeline normalized invoices across 30 to 40 supplier formats. Textract bills per page, so I sized batches and trimmed pages in preprocessing to keep the cost down.

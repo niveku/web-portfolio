@@ -9,20 +9,20 @@ featured: false
 
 ## The problem: distribution data at operational scale
 
-Coca-Cola Chile's distribution and logistics operation generated data across distribution, transport, and stock — at operational scale. The data needed to flow reliably into analytical systems, with strong quality guarantees before any output reached client-facing dashboards.
+Coca-Cola Chile's distribution and logistics operation generated stock and transport data. That data had to reach analytical systems on a dependable schedule, and each output had to clear quality checks before it fed client-facing dashboards.
 
 ## My role: data engineer with direct client work
 
-Technical contributor with direct client interaction. I handled ETL development, data modeling, traceability work, requirement refinement, and issue resolution. I also participated in quality-gate workflows — coverage checks, Sonar analysis, and benchmark comparisons before delivery.
+I worked as a data engineer in direct contact with the client. I built and modeled the ETL flows, kept output traceable to source, refined incoming requirements, and resolved issues as they came up. I also owned the quality gates that ran before every delivery.
 
 ## What I built: quality-gated ETL flows
 
-- ETL flows processing distribution and logistics data across multiple operational dimensions.
-- Data modeling for stock, transport, and loss tracking.
-- Traceability mechanisms linking outputs back to source data.
-- Quality gates: unit test coverage, SonarQube analysis, and benchmark validation runs before each delivery.
-- Client communication: translating ambiguous business requirements into implementation specs and reporting back on tradeoffs.
+- ETL flows that processed distribution and logistics data across stock and transport.
+- Data models for stock and transport tracking.
+- Traceability linking each output back to its source data.
+- A pre-delivery quality gate: unit-test coverage, SonarQube analysis, and benchmark validation runs.
+- A requirements loop with the client: I turned loose business asks into implementation specs and walked stakeholders through the tradeoffs.
 
 ## Outcome: technical rigor with stakeholder transparency
 
-A delivery model that combined technical rigor (quality gates, coverage, Sonar) with stakeholder transparency. Working directly with the client required handling ambiguity in real time — converting verbal requirements into actionable specs on short cycles.
+Each delivery cleared its quality gate, and the client stayed in the loop through every cycle. When a requirement was ambiguous, I closed the gap with the stakeholder before the team built on it.

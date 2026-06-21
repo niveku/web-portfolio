@@ -1,6 +1,6 @@
 ---
 title: "OpenClaw — Personal AI Automation System"
-summary: "A personal AI workflow system built on Claude Code, MCPs, and custom skills — designed to operate across development, career management, and knowledge work at significantly higher throughput."
+summary: "A personal AI workflow system built on Claude Code, MCPs, and custom skills that operates across development, career management, and knowledge work."
 date: 2026-01-01
 category: AI/Automation
 stack: ["Claude Code", "MCPs", "Obsidian", "Python", "Windows"]
@@ -9,16 +9,16 @@ featured: true
 
 ## Problem
 
-Modern AI tools are powerful individually but fragmented — each tool requires its own context, workflow, and mental switching cost. I wanted a unified operating model where AI assistance is persistent, contextual, and integrated into real workflows rather than a separate tool I context-switch into.
+Each AI tool I used carried its own context, its own workflow, its own switching cost. Nothing held state between them. I wanted one operating model where the assistant kept context across sessions and ran inside my real workflows, not a separate window I had to load up every time.
 
 ## What I Built
 
-OpenClaw is a personal system built on top of Claude Code's plugin and skill architecture:
+OpenClaw runs on Claude Code's plugin and skill architecture:
 
-- **Skills:** Custom reusable instructions for recurring workflows — career OS operations, code review patterns, content production, session management.
-- **MCPs (Model Context Protocol servers):** Integrations that give the AI direct access to my Obsidian vault, calendar, and file system — enabling it to reason across my actual context rather than isolated prompts.
-- **Workflow automation:** Recurring operations (CV tailoring, interview prep, project documentation, research synthesis) are expressed as skills that invoke the right tools in the right sequence.
-- **Memory system:** Persistent file-based memory across sessions so context accumulates rather than resetting.
+- **Skills:** Reusable instructions for recurring work, including career OS operations, code review patterns, content production, and session management.
+- **MCPs (Model Context Protocol servers):** Integrations that connect the assistant to my Obsidian vault, calendar, and file system, so it reads my actual context instead of an isolated prompt.
+- **Workflow automation:** I express recurring jobs, including CV tailoring, interview prep, project documentation, and research synthesis, as skills that call the right tools in the right order.
+- **Memory system:** File-based memory that carries context from one session into the next.
 
 ## Operating Model
 
@@ -26,4 +26,4 @@ I use OpenClaw as a daily operating system for technical work: drafting and main
 
 ## Outcome
 
-A measurably faster personal workflow across development, writing, and knowledge management. The system is under continuous iteration — each improvement compounds across all the workflows that depend on it.
+I move faster across development, writing, and knowledge management. When I improve one skill, every workflow that calls it gets the benefit, so I keep refining the ones I run most.

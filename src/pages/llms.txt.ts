@@ -12,17 +12,17 @@ export const GET: APIRoute = ({ site }) => {
 
 > ${career.identity.summaries.geospatial.split('. ').slice(0, 2).join('. ')}.
 
-This is the personal portfolio of Kevin Henao (handle: "niveku"). The site is a static Astro site documenting his geospatial data engineering work, projects, and writing.
+Personal portfolio of Kevin Henao (handle: "niveku"). A static Astro site covering his geospatial data engineering work, projects, and writing.
 
 ## Positioning
 - Primary: Geospatial Data Engineer (GIS + Python + AWS + spatial data pipelines)
-- Secondary: Data Engineer (geospatial/GIS edge), GIS Python Developer, Technical Product Operator, AI workflow & automation (private practice on the Claude/Anthropic stack)
+- Secondary: Data Engineer (geospatial/GIS edge), GIS Python Developer, Technical Product Operator, AI workflow & automation on the Claude/Anthropic stack
 
 ## Pages
 - [Home](${base}/): overview, selected work, career cross-section, contact
 - [About](${base}/about): full background, experience timeline, skills, education, certifications
 - [Projects](${base}/projects): case studies across geospatial, data engineering, and AI/automation
-- [Blog](${base}/blog): notes on tooling, AI workflows, and turning ambiguous work into systems
+- [Blog](${base}/blog): notes on GIS tooling, AWS pipelines, and AI workflow automation
 - [Contact](${base}/contact): how to reach Kevin
 
 ## Selected work

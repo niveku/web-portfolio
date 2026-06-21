@@ -1,38 +1,38 @@
 ---
 title: "Tools I rely on, May 2026"
-summary: "A snapshot of the tools that actually move my work forward — Obsidian, Claude Code, Astro, and daily Python on Windows — and what earns a permanent slot versus what I dropped."
+summary: "A dated snapshot of the tools I run day to day: Obsidian, Claude Code, Astro, and Python on Windows. What earns a permanent slot, and what I cut this year."
 date: 2026-05-13
 tags: ["tooling", "productivity", "workflow"]
 ---
 
-Tool lists age fast, so this is dated on purpose. It's what I'm actually using in May 2026 as a geospatial data engineer who works across GIS, AWS pipelines, and a fair amount of writing. The rule for making this list is simple: a tool earns a slot only if removing it would visibly slow me down.
+Tool lists age fast, so I dated this one. It's what I run in May 2026 as a geospatial data engineer working across GIS, AWS pipelines, and a steady amount of writing. I built the list on one rule: a tool earns a slot only if removing it would slow me down.
 
 ## Note-taking — Obsidian + Bases
 
-My notes are plain Markdown files on disk, which is the whole reason I trust them. Obsidian is the editor on top; if it disappeared tomorrow the files would still open in anything.
+My notes are plain Markdown files on disk, which is why I trust them. Obsidian is the editor on top; if it shut down tomorrow the files would still open in any text editor.
 
-What changed my use of it was **Bases** — turning a folder of notes into a queryable table. My career history, project log, and a running "decisions" file are all structured notes I can filter and sort instead of scroll. It's the difference between a journal and a small database I happen to write in prose.
+**Bases** changed how I use it. It queries a folder of notes as a table, so I filter and sort my career history, project log, and a running "decisions" file instead of scrolling them. I write the entries in prose and read them back as a small database.
 
 ## AI pairing — Claude Code
 
-Claude Code lives in the terminal with access to my files and shell, so it works on the real repository instead of a pasted snippet. The part that compounds is the skill and MCP layer: I write an instruction once — "draft a project page from this achievement note" — and reuse it instead of re-explaining the task every time.
+Claude Code lives in the terminal with access to my files and shell, so it works on the real repository instead of a pasted snippet. The skill and MCP layer compounds: I write an instruction once ("draft a project page from this achievement note") and reuse it instead of re-explaining the task every time.
 
-The honest limit is context. Long sessions drift, so I keep them to one task and commit before switching. A bad skill produces consistently bad output, so I review skills the way I review code.
+Context is the limit. Long sessions drift, so I keep each one to a single task and commit before switching. A bad skill produces bad output on repeat, so I review skills the way I review code.
 
 ## Personal site — Astro + Tailwind 4
 
-This site is Astro. The pitch that holds up in practice: ship static HTML by default, hydrate only the parts that are actually interactive. The home page is mostly server-rendered markup with two small islands; everything else ships zero JavaScript. Tailwind 4 handles styling without a separate config file. For a portfolio that needs to be fast, crawlable, and free to host, that combination is hard to beat.
+This site runs on Astro. It ships static HTML by default and hydrates only the interactive parts. The home page is mostly server-rendered markup with two small islands; every other page ships zero JavaScript. Tailwind 4 handles styling without a separate config file. For a portfolio that needs to load fast, stay crawlable, and host for free, that combination wins.
 
 ## Daily Python on Windows
 
-Most of my data and geospatial work is Python — pandas, GeoPandas, scikit-learn, the AWS SDK. I run it on Windows, which means one small discipline: the interpreter is `python`, not `python3`. Tiny detail, but every cross-platform tutorial assumes the Unix name and it's a recurring papercut.
+Most of my data and geospatial work runs on Python: pandas, GeoPandas, scikit-learn, the AWS SDK. I run it on Windows, which forces one discipline. The interpreter is `python`, not `python3`. Most cross-platform tutorials assume the Unix name, so it stays a recurring papercut.
 
-For environments I keep it boring — virtual environments per project, requirements pinned, no clever global installs. The goal is that a script I wrote six months ago still runs today.
+For environments I stay conservative: a virtual environment per project, requirements pinned, no global installs. A script I wrote six months ago should still run today.
 
 ## What I dropped this year
 
-- **Heavy all-in-one IDEs for quick scripts.** For a one-file utility, a terminal and an editor beat spinning up a full project.
+- **Heavy all-in-one IDEs for quick scripts.** For a one-file utility, a terminal and an editor beat opening a full project.
 - **Manual note cross-linking as a system.** Bases queries replaced most of the by-hand linking I used to do.
-- **Bookmarking tools.** If something matters, it becomes a note with a sentence on *why* it matters. If it's not worth a sentence, it wasn't worth saving.
+- **Bookmarking tools.** Anything worth keeping becomes a note with a sentence on *why* it matters. If it's not worth a sentence, it wasn't worth saving.
 
-None of this is a recommendation to adopt my stack. It's a snapshot — useful mostly as a prompt to ask which of your own tools would actually be missed if they vanished.
+None of this is a recommendation to adopt my stack. Read it as a prompt to ask which of your own tools you would miss if they vanished tomorrow.

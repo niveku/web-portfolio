@@ -57,6 +57,75 @@ body > header nav ul a {
   transition: color 0.2s;
 }
 body > header nav ul a:hover { color: var(--ink-hi); }
+.bl-cta { color: var(--pink-soft) !important; }
+
+/* ---- Hamburger (mobile) ----------------------------------------------- */
+.bl-burger {
+  display: none; /* shown < 720px */
+  width: 40px; height: 40px;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.bl-burger span {
+  display: block;
+  width: 17px; height: 1.8px;
+  border-radius: 2px;
+  background: var(--ink-hi);
+  transition: transform .25s ease, opacity .2s ease;
+}
+body > header nav[data-open] .bl-burger { border-color: var(--magenta); }
+body > header nav[data-open] .bl-burger span:nth-child(1) { transform: translateY(5.8px) rotate(45deg); }
+body > header nav[data-open] .bl-burger span:nth-child(2) { opacity: 0; }
+body > header nav[data-open] .bl-burger span:nth-child(3) { transform: translateY(-5.8px) rotate(-45deg); }
+.bl-backdrop {
+  position: fixed; inset: 0; z-index: 40;
+  background: color-mix(in oklab, var(--bg-0) 55%, transparent);
+  backdrop-filter: blur(2px);
+}
+
+@media (max-width: 720px) {
+  body > header nav { position: relative; }
+  .bl-burger { display: inline-flex; }
+  body > header nav ul {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 12px; left: 12px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 16px;
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border-hi);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+    display: none;
+  }
+  body > header nav[data-open] ul { display: flex; }
+  body > header nav ul li { width: 100%; }
+  body > header nav ul a {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  body > header nav ul a:hover { background: color-mix(in oklab, var(--magenta) 14%, transparent); }
+  body > header nav ul a.bl-cta {
+    text-align: center;
+    margin-top: 4px;
+    background: color-mix(in oklab, var(--magenta) 26%, transparent);
+    border: 1px solid var(--glass-border-hi);
+  }
+}
 
 /* ---- Main container --------------------------------------------------- */
 main {

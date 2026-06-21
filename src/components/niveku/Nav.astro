@@ -5,7 +5,7 @@ import { career } from '../../data/career';
 const gh = career.identity.socials.find((s) => s.type === 'github')!.url;
 const li = career.identity.socials.find((s) => s.type === 'linkedin')!.url;
 ---
-<nav class="nk-nav glass">
+<nav class="nk-nav glass" id="nk-nav">
   <a href="#top" class="nk-logo">
     <span class="nk-logo-mark" aria-hidden="true">
       <svg class="logo-globe" viewBox="-16 -16 32 32" width="28" height="28">
@@ -62,17 +62,70 @@ const li = career.identity.socials.find((s) => s.type === 'linkedin')!.url;
       <span class="kana">二ベク</span>
     </span>
   </a>
-  <ul class="nk-links">
+  <button
+    class="nk-burger"
+    id="nk-burger"
+    type="button"
+    aria-expanded="false"
+    aria-controls="nk-menu"
+    aria-label="Open menu"
+  >
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nk-links" id="nk-menu">
     <li><a href="#projects">Projects</a></li>
     <li><a href="#strata">Strata</a></li>
     <li><a href="#blog">Writing</a></li>
     <li><a href="#about">About</a></li>
     <li>
-      <a class="nk-icon" href={gh} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="github" /></a>
+      <a class="nk-icon" href={gh} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="github" /><span class="nk-icon-text">GitHub</span></a>
     </li>
     <li>
-      <a class="nk-icon" href={li} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+      <a class="nk-icon" href={li} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /><span class="nk-icon-text">LinkedIn</span></a>
     </li>
     <li><a href="#contact" class="cta">Contact <span class="btn-arrow">→</span></a></li>
   </ul>
 </nav>
+<div class="nk-backdrop" id="nk-backdrop" hidden></div>
+
+<script is:inline>
+  (function () {
+    const nav = document.getElementById('nk-nav');
+    const btn = document.getElementById('nk-burger');
+    const menu = document.getElementById('nk-menu');
+    const backdrop = document.getElementById('nk-backdrop');
+    if (!nav || !btn || !menu) return;
+
+    const open = () => {
+      nav.setAttribute('data-open', 'true');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close menu');
+      document.body.style.overflow = 'hidden';
+      if (backdrop) backdrop.hidden = false;
+    };
+    const close = () => {
+      nav.removeAttribute('data-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+      document.body.style.overflow = '';
+      if (backdrop) backdrop.hidden = true;
+    };
+    const toggle = () => (nav.hasAttribute('data-open') ? close() : open());
+
+    btn.addEventListener('click', toggle);
+    if (backdrop) backdrop.addEventListener('click', close);
+    menu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.hasAttribute('data-open')) {
+        close();
+        btn.focus();
+      }
+    });
+    const mq = window.matchMedia('(min-width: 721px)');
+    mq.addEventListener('change', (e) => {
+      if (e.matches) close();
+    });
+  })();
+</script>

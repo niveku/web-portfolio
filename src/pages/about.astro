@@ -20,32 +20,33 @@ const fmtRange = (s: string, e: string) => `${s} – ${e}`;
 
 <BaseLayout
   title="About"
-  description="Kevin Henao — geospatial data engineer and geoscientist (8+ years): GIS, Python/GeoPandas, AWS data pipelines, and AI-assisted workflows. Bogotá, remote-first."
+  description="Kevin Henao is a geospatial data engineer and geoscientist with 8+ years across GIS, Python/GeoPandas, AWS data pipelines, and AI-assisted workflows. Based in Bogotá, remote-first."
   type="profile"
   schemas={schemas}
 >
   <article>
-    <h1>About — Kevin Henao</h1>
+    <h1>About · Kevin Henao</h1>
 
     <section>
       <h2>Who I am</h2>
       <p>
         I'm a <strong>geospatial data engineer</strong> who started as a geoscientist.
         I studied Geosciences at Universidad de los Andes, then spent my first years
-        in field geology and 3D ore modeling — work that pulled me into Python, GIS,
-        and spatial data. Over 8+ years I grew from geological reporting and map
-        production into operational GIS, cloud data engineering on AWS, and, more
-        recently, AI-assisted workflow automation.
+        in field geology and 3D ore modeling. That work put me into Python, GIS, and
+        spatial data daily. Over 8+ years I moved from geological reporting and map
+        production into operational GIS, then cloud data engineering on AWS, and now
+        AI-assisted workflow automation.
       </p>
       <p>
-        The throughline is translating domain-heavy, ambiguous problems into working
-        technical systems — a serverless invoice pipeline normalizing 30–40 supplier
-        formats, COVID geospatial monitoring for a national government agency, the
-        first 3D geological model of an emerald deposit, and a Random Forest facies
-        classifier that became the technical core of an SPE paper.
+        I take domain-heavy, ambiguous problems and turn them into systems that run.
+        At Arkho I architected a serverless invoice pipeline that normalized 30–40
+        supplier formats for AB InBev. At DIMAR, Colombia's maritime authority, I
+        shipped a COVID geospatial monitoring workflow. At Fura I built the first 3D
+        geological model of the Coscuez emerald deposit. At Imaged Reality I built a
+        Random Forest facies classifier that became the technical core of an SPE paper.
       </p>
       <p>
-        I'm a co-author of <em>"Automating Core Data Integration: Insights from the
+        I co-authored <em>"Automating Core Data Integration: Insights from the
         Volve Field Case Study"</em>, presented at ADIPEC 2025 (SPE OnePetro
         D041S138R004), applying machine learning to geoscience data workflows.
       </p>
@@ -55,7 +56,7 @@ const fmtRange = (s: string, e: string) => `${s} – ${e}`;
       <h2>Experience</h2>
       {experience.map((job) => (
         <article class="role">
-          <h3>{job.role} — {job.company}</h3>
+          <h3>{job.role} · {job.company}</h3>
           <p class="meta">
             {fmtRange(job.start, job.end)} · {job.location} · {job.type}
           </p>
@@ -87,7 +88,7 @@ const fmtRange = (s: string, e: string) => `${s} – ${e}`;
       <ul>
         {education.map((e) => (
           <li>
-            <strong>{e.degree}</strong> — {e.institution} ({fmtRange(e.start, e.end)})
+            <strong>{e.degree}</strong> · {e.institution} ({fmtRange(e.start, e.end)})
             {e.gpa && <> · GPA {e.gpa}</>}
             {e.honors && e.honors.length > 0 && <> · {e.honors.join('; ')}</>}
           </li>
@@ -99,7 +100,7 @@ const fmtRange = (s: string, e: string) => `${s} – ${e}`;
       <h2>Certifications & credentials</h2>
       <ul>
         {certifications.map((c) => (
-          <li>{c.name} — {c.issuer}{c.year && <> ({c.year})</>}</li>
+          <li>{c.name} · {c.issuer}{c.year && <> ({c.year})</>}</li>
         ))}
       </ul>
     </section>
@@ -120,7 +121,7 @@ const fmtRange = (s: string, e: string) => `${s} – ${e}`;
       <p>
         {identity.languages.map((l) => `${l.language} (${l.level})`).join(' · ')}.
       </p>
-      <p>Based in {identity.location}. Remote-first since 2021.</p>
+      <p>I work from {identity.location}, remote-first since 2021.</p>
     </section>
   </article>
 </BaseLayout>

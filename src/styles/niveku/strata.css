@@ -235,7 +235,7 @@
   color: var(--ink-mid);
   font-family: var(--font-mono);
 }
-.strata-footer-text em { font-style: normal; color: var(--pink-soft); }
+.strata-footer-claim { color: var(--pink-soft); }
 
 @media (max-width: 900px) {
   .strata-column { grid-template-columns: 1fr; }

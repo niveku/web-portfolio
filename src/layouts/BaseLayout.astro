@@ -55,16 +55,69 @@ const baseSchemas = [personSchema(Astro.site), websiteSchema(Astro.site)];
   </head>
   <body>
     <header>
-      <nav>
+      <nav id="site-nav">
         <a href="/">Niveku</a>
-        <ul>
+        <button
+          class="bl-burger"
+          id="site-burger"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          aria-label="Open menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul id="site-menu">
           <li><a href="/about">About</a></li>
           <li><a href="/projects">Projects</a></li>
           <li><a href="/blog">Blog</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/contact" class="bl-cta">Contact →</a></li>
         </ul>
       </nav>
+      <div class="bl-backdrop" id="site-backdrop" hidden></div>
     </header>
+
+    <script is:inline>
+      (function () {
+        const nav = document.getElementById('site-nav');
+        const btn = document.getElementById('site-burger');
+        const menu = document.getElementById('site-menu');
+        const backdrop = document.getElementById('site-backdrop');
+        if (!nav || !btn || !menu) return;
+
+        const open = () => {
+          nav.setAttribute('data-open', 'true');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', 'Close menu');
+          document.body.style.overflow = 'hidden';
+          if (backdrop) backdrop.hidden = false;
+        };
+        const close = () => {
+          nav.removeAttribute('data-open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Open menu');
+          document.body.style.overflow = '';
+          if (backdrop) backdrop.hidden = true;
+        };
+        const toggle = () => (nav.hasAttribute('data-open') ? close() : open());
+
+        btn.addEventListener('click', toggle);
+        if (backdrop) backdrop.addEventListener('click', close);
+        menu.addEventListener('click', (e) => {
+          if (e.target.closest('a')) close();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && nav.hasAttribute('data-open')) {
+            close();
+            btn.focus();
+          }
+        });
+        const mq = window.matchMedia('(min-width: 721px)');
+        mq.addEventListener('change', (e) => {
+          if (e.matches) close();
+        });
+      })();
+    </script>
 
     <main>
       <slot />
