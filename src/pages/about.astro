@@ -20,7 +20,7 @@ const fmtRange = (s: string, e: string) => `${s} – ${e}`;
 
 <BaseLayout
   title="About"
-  description="Kevin Henao is a geospatial data engineer and geoscientist with 8+ years across GIS, Python/GeoPandas, AWS data pipelines, and AI-assisted workflows. Based in Bogotá, remote-first."
+  description="Kevin Henao, geospatial data engineer and geoscientist, 8+ years across GIS (QGIS, ArcGIS, GeoPandas), Python, and AWS spatial data pipelines. Built the first 3D model of the Coscuez emerald deposit; SPE co-author, ADIPEC 2025. Bogotá, remote-first."
   type="profile"
   schemas={schemas}
 >
@@ -31,24 +31,36 @@ const fmtRange = (s: string, e: string) => `${s} – ${e}`;
       <h2>Who I am</h2>
       <p>
         I'm a <strong>geospatial data engineer</strong> who started as a geoscientist.
-        I studied Geosciences at Universidad de los Andes, then spent my first years
-        in field geology and 3D ore modeling. That work put me into Python, GIS, and
-        spatial data daily. Over 8+ years I moved from geological reporting and map
-        production into operational GIS, then cloud data engineering on AWS, and now
-        AI-assisted workflow automation.
+        I studied Geosciences at Universidad de los Andes (GPA 4.12/5, on the "Quiero
+        Estudiar" scholarship) and hold a CPG license. My first job was field geology
+        in Colombia's emerald belt: core logging, structural mapping, and 3D ore
+        modeling in Leapfrog and Datamine. Reporting ran on QGIS and hand-built
+        Python, so I automated map and report production and gave Fura back about
+        100 hours a year. Over 8+ years I moved from geological
+        reporting into operational GIS, then into cloud data engineering on AWS.
       </p>
       <p>
-        I take domain-heavy, ambiguous problems and turn them into systems that run.
-        At Arkho I architected a serverless invoice pipeline that normalized 30–40
-        supplier formats for AB InBev. At DIMAR, Colombia's maritime authority, I
-        shipped a COVID geospatial monitoring workflow. At Fura I built the first 3D
-        geological model of the Coscuez emerald deposit. At Imaged Reality I built a
-        Random Forest facies classifier that became the technical core of an SPE paper.
+        I take domain-heavy, ambiguous problems and ship systems that run in
+        production. At Fura I built the first 3D geological model of the Coscuez
+        emerald deposit, the basis for the company's first formal Colombian emerald
+        resource estimation. At DIMAR, Colombia's maritime authority, institutional planners had no single
+        view of operational status during COVID, so I shipped a monitoring
+        workflow on ArcGIS Online, Survey123, and GeoPandas, and released ViENOS, an
+        open-source Python/Dash dashboard (MIT) for tracking El Niño and La Niña on the
+        Pacific coast.
       </p>
       <p>
-        I co-authored <em>"Automating Core Data Integration: Insights from the
-        Volve Field Case Study"</em>, presented at ADIPEC 2025 (SPE OnePetro
-        D041S138R004), applying machine learning to geoscience data workflows.
+        At Arkho I took the acting-architect role on AB InBev invoice automation, where
+        supplier PDFs arrived in 30–40 incompatible layouts. I designed the pipeline that
+        normalized them into structured data on AWS Textract, Lambda, and Step
+        Functions. I also built the Casaideas SAP-to-cloud pipeline on Glue, PySpark,
+        and S3, and contributed to Coca-Cola Chile distribution ETL under quality-gated
+        DevOps, shipping 15+ ETLs across 4 AWS CDK projects and 20+ Redshift reports.
+        At Imaged Reality I extended the Stratbox Python API for depth-referenced
+        extraction and trained a Random Forest facies classifier on borehole core
+        imagery. That pipeline became the technical core of <em>"Automating Core Data
+        Integration: Insights from the Volve Field Case Study"</em>, which I co-authored
+        for ADIPEC 2025 (SPE OnePetro D041S138R004).
       </p>
     </section>
 

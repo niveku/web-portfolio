@@ -202,7 +202,7 @@ export const career: Career = {
       geospatial:
         'Geospatial data engineer and geoscientist with 8+ years building spatial systems end to end, from field data and resource models to ArcGIS Online dashboards, Python/Dash applications, and AWS data pipelines. He pairs a BSc in Geosciences with GIS depth across QGIS, the ArcGIS suite, GeoPandas, PostGIS, and GDAL, and has shipped geospatial work used by mining, government, and operations teams. The record includes the first 3D geological model of the Coscuez emerald deposit and, for the Colombian Maritime Authority (DIMAR), a Survey123 + GeoPandas COVID monitoring workflow, ArcGIS web apps and dashboards, and the open-source ViENOS oceanographic ENSO monitoring dashboard. He turns environmental, geological, and spatial data into decision-oriented outputs for technical, institutional, and community-facing audiences, and takes the architect role in practice when scope is ambiguous.',
       dataEngineering:
-        'Data engineer with 8+ years building production data systems on AWS (Lambda, Glue, Step Functions, Textract, Redshift, Athena, DynamoDB) for clients in CPG, retail, and government. At Arkho he led architecture and implementation of the AB InBev invoice-PDF pipeline across 30–40 supplier formats (Textract + Lambda + Step Functions), built the Casaideas SAP-to-cloud pipelines (Glue, PySpark, S3) with traceable lineage and end-to-end observability, contributed to Coca-Cola Chile distribution ETL under quality-gated DevOps, and deployed projects to AWS with CDK and infrastructure-as-code practices. He handles document AI and pipeline orchestration, takes the architect role when requirements are vague, and brings a geosciences background that fits spatial and scientific data domains.',
+        'Data engineer with 8+ years building production data systems on AWS (Lambda, Glue, Step Functions, Textract, Redshift, Athena, DynamoDB) for clients in CPG, retail, and government. At Arkho he led architecture and implementation of the AB InBev invoice-PDF pipeline across 30–40 supplier formats (Textract + Lambda + Step Functions), built the Casaideas SAP-to-cloud pipelines (Glue, PySpark, S3) with traceable lineage and end-to-end observability, contributed to Coca-Cola Chile distribution ETL under quality-gated DevOps, and deployed projects to AWS with CDK and infrastructure-as-code practices, delivering 15+ ETLs across 4 CDK projects and 20+ Redshift reports. He handles document AI and pipeline orchestration, takes the architect role when requirements are vague, and brings a geosciences background that fits spatial and scientific data domains.',
       productOperator:
         'Hybrid product owner and Python/AWS engineer who holds scope, code, and stakeholders at once. As Geoscience Software Specialist at Imaged Reality (UK, remote), he leads technical product delivery for enterprise oil and gas clients on the Stratbox platform: running product onboardings, advancing pilots to active accounts, designing the Jira bug-reporting process, and bridging product, QA, and client communication by translating geoscience workflows into specs and engineering priorities. Earlier, as a data engineer at Arkho, he took the architect role in practice on AB InBev and Coca-Cola data initiatives. He works well in early-stage and ambiguous environments, turning unclear requirements into testable designs and framing engineering tradeoffs in terms stakeholders can act on.',
       aiAutomation:
@@ -225,7 +225,7 @@ export const career: Career = {
         'Extended the Stratbox Python API with a depth-referenced data extraction method, and built and optimized a supervised Random Forest facies classification pipeline',
         'Designed and ran a structured Jira bug-reporting and triage process',
         'Co-authored an SPE paper at ADIPEC 2025: "Automating Core Data Integration: Insights from the Volve Field Case Study" (Borya, A., Henao, K., Ruiz-Graham, C.; SPE OnePetro D041S138R004)',
-        'Ran client onboardings and supported pilots advancing to active accounts',
+        'Ran ~20 product onboardings and supported pilots advancing to active accounts',
         'Supported simultaneous enterprise accounts in the oil & gas sector',
         'Used GIS/spatial analysis throughout product support, analysis, and product design',
       ],
@@ -249,6 +249,7 @@ export const career: Career = {
         'Contributed to Coca-Cola Chile data initiatives involving stock, logistics, and ingestion workflows under strict code-quality, security, coverage, and maintainability requirements',
         'Managed delivery workflows using GitHub Actions, AWS CDK, CloudFormation, and AWS CLI, supporting automated deployments and least-privilege IAM patterns',
         'Implemented benchmark- and cost-driven improvements across AWS workflows under enterprise constraints',
+        'Delivered 15+ ETLs across 4 AWS CDK projects and 20+ Redshift reports under quality-gated DevOps (SonarQube, GitHub Actions)',
       ],
       stack: ['AWS', 'Python', 'PySpark', 'SQL', 'AWS Glue', 'Lambda', 'Step Functions', 'S3', 'Redshift', 'Athena', 'CloudWatch', 'Textract', 'SQS', 'GitHub Actions', 'AWS CDK', 'CloudFormation', 'AWS CLI', 'IAM', 'SonarQube', 'Power BI'],
       clients: ['Casaideas', 'AB InBev', 'Coca-Cola Chile'],
@@ -376,7 +377,7 @@ export const career: Career = {
       title: '3D geological model and resource estimation (Coscuez)',
       impact:
         "Built the first 3D geological model of the Coscuez emerald deposit for resource estimation, contributing to Fura's first formal Colombian emerald resource estimation.",
-      metrics: [],
+      metrics: ['~100 hours/year saved via Python automation of reporting'],
       stack: ['Leapfrog Geo', 'DATAMINE', 'QGIS', 'Python', 'SQLite', 'pandas', 'NumPy', 'matplotlib', 'xlwings'],
       tags: ['geospatial', 'geosciences', 'modeling', 'python', 'ownership-acting-architect'],
     },
@@ -406,7 +407,7 @@ export const career: Career = {
       title: 'Coca-Cola Chile — Distribution data flow',
       impact:
         'Contributed to an AWS-based distribution and stock data flow for Coca-Cola Chile, part of a portfolio of production ETLs delivered under quality-gated DevOps.',
-      metrics: [],
+      metrics: ['15+ ETLs across 4 CDK projects', '20+ Redshift reports'],
       stack: ['AWS', 'Python', 'SQL', 'SonarQube', 'AWS CDK', 'Redshift'],
       tags: ['data-engineering', 'automation', 'aws', 'client-facing-delivery'],
     },
@@ -446,7 +447,7 @@ export const career: Career = {
       title: 'Geoscience Software Specialist (current role)',
       impact:
         'Hybrid geoscience software specialist bridging enterprise oil & gas clients with product and development teams, combining geological domain expertise with software development skills.',
-      metrics: ['July 2024–present'],
+      metrics: ['July 2024–present', '~20 product onboardings'],
       stack: ['Python', 'SQL', 'PostgreSQL', 'JavaScript', 'Jira', 'Confluence', 'QGIS'],
       tags: ['product', 'technical-operations', 'geoscience', 'aws', 'python', 'ownership', 'client-facing-delivery', 'cross-functional-coordination'],
     },

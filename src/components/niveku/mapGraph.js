@@ -100,21 +100,24 @@ const EDGES = [
 // Nodes the rotating pulse cycles through (companies, flagship work, publication).
 const PRIMARIES = ['fura', 'dimar', 'arkho', 'imaged', 'abinbev', 'casaideas', 'coca', 'vienos', 'coscuez', 'jira', 'adipec', 'openclaw'];
 
-// Cluster centres on the normalized 0..100 canvas. Bogotá sits left-of-centre,
-// matching the original anchor; the four domains fan out around it.
+// Cluster centres on the normalized 0..100 canvas. Bogotá sits at the centre as
+// the base; the four domains seed into the surrounding quadrants (data top-left,
+// geo lower-left, product upper-right, ai lower-right). Final spacing is resolved
+// by relax() so nothing overlaps.
 const CENTERS = {
-  core: { x: 30, y: 55 },
-  geo: { x: 18, y: 73 },
-  data: { x: 52, y: 23 },
-  product: { x: 83, y: 46 },
-  ai: { x: 73, y: 84 },
+  core: { x: 49, y: 51 },
+  data: { x: 38, y: 18 },
+  geo: { x: 18, y: 64 },
+  product: { x: 82, y: 36 },
+  ai: { x: 74, y: 80 },
 };
 
 const GOLDEN = 2.399963229728653; // radians
 
-// Deterministic placement: hub at its cluster centre, the rest on a golden-angle
-// spiral around it (y squeezed to fit the 4:3 canvas), clamped inside the frame.
-function layout(nodes) {
+// Seed: hub at its cluster centre, the rest on a golden-angle spiral around it
+// (y squeezed for the 4:3 canvas). Companies come first in each group array, so
+// they land near the centre and tools fan out.
+function seed(nodes) {
   const byGroup = { core: [], geo: [], data: [], product: [], ai: [] };
   for (const n of nodes) (byGroup[n.group] || (byGroup[n.group] = [])).push(n);
 
@@ -128,14 +131,51 @@ function layout(nodes) {
         return;
       }
       spin += 1;
-      const radius = 8 + Math.sqrt(spin) * 5.2;
+      const radius = 9 + Math.sqrt(spin) * 6;
       const a = spin * GOLDEN;
-      const x = c.x + Math.cos(a) * radius;
-      const y = c.y + Math.sin(a) * radius * 0.8;
-      n.x = Math.max(7, Math.min(93, x));
-      n.y = Math.max(9, Math.min(92, y));
+      n.x = c.x + Math.cos(a) * radius;
+      n.y = c.y + Math.sin(a) * radius * 0.82;
     });
   }
+  return nodes;
+}
+
+// Relax: deterministic pairwise separation so no two nodes overlap. Bogotá stays
+// pinned at the centre; everything else is nudged apart and clamped to the frame.
+// O(n^2 * iterations) but n=35 — trivial at build time, and fully deterministic.
+function relax(nodes) {
+  const ITER = 90;
+  const BASE = 8.5;
+  for (let k = 0; k < ITER; k++) {
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i];
+        const b = nodes[j];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const d = Math.hypot(dx, dy) || 0.001;
+        const min = BASE + (a.id === 'bogota' || b.id === 'bogota' ? 6 : 0) + (a.size + b.size) / 12;
+        if (d < min) {
+          const push = (min - d) / 2;
+          const ux = dx / d;
+          const uy = dy / d;
+          if (a.id !== 'bogota') { a.x -= ux * push; a.y -= uy * push; }
+          if (b.id !== 'bogota') { b.x += ux * push; b.y += uy * push; }
+        }
+      }
+    }
+    for (const n of nodes) {
+      if (n.id === 'bogota') continue;
+      n.x = Math.max(7, Math.min(93, n.x));
+      n.y = Math.max(10, Math.min(91, n.y));
+    }
+  }
+  return nodes;
+}
+
+function layout(nodes) {
+  seed(nodes);
+  relax(nodes);
   return nodes;
 }
 
