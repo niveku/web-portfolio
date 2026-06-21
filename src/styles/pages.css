@@ -1,0 +1,251 @@
+/* Neon-themed base for BaseLayout pages (about, projects, blog, contact, and
+   project/blog detail). Reuses the niveku design tokens so subpages share the
+   home's aesthetic. Import order: tailwind (global.css) → tokens.css → this. */
+
+body {
+  background-color: var(--bg-0);
+  background-image:
+    radial-gradient(ellipse 90% 60% at 15% -10%, color-mix(in oklab, var(--magenta) 38%, transparent), transparent 60%),
+    radial-gradient(ellipse 70% 60% at 85% 0%, color-mix(in oklab, var(--violet) 32%, transparent), transparent 60%),
+    radial-gradient(circle at 90% 90%, color-mix(in oklab, var(--cyan) 14%, transparent), transparent 45%);
+  background-attachment: fixed;
+  line-height: 1.6;
+}
+
+/* ---- Top nav ---------------------------------------------------------- */
+body > header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  background: color-mix(in oklab, var(--bg-0) 72%, transparent);
+  border-bottom: 1px solid var(--glass-border);
+}
+body > header nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+body > header nav > a {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: var(--pink-soft);
+  text-decoration: none;
+  text-shadow: 0 0 12px color-mix(in oklab, var(--magenta) 45%, transparent);
+}
+body > header nav ul {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+body > header nav ul a {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+body > header nav ul a:hover { color: var(--ink-hi); }
+
+/* ---- Main container --------------------------------------------------- */
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+
+/* ---- Typography ------------------------------------------------------- */
+main h1 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 6vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink-hi);
+  margin: 0 0 24px;
+  text-shadow: 0 0 26px color-mix(in oklab, var(--magenta) 30%, transparent);
+}
+main h2 {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.5vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink-hi);
+  margin: 52px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--glass-border);
+}
+main h3 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--pink-soft);
+  margin: 28px 0 8px;
+}
+main p { color: var(--ink); margin: 0 0 16px; }
+main a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid color-mix(in oklab, var(--cyan) 35%, transparent); }
+main a:hover { color: var(--ink-hi); border-bottom-color: var(--cyan); }
+main strong { color: var(--ink-hi); font-weight: 700; }
+main em { color: var(--ink-hi); font-style: italic; }
+main ul { padding-left: 1.2em; margin: 0 0 16px; }
+main li { margin: 6px 0; color: var(--ink); }
+main time { font-family: var(--font-mono); font-size: 13px; color: var(--ink-mid); }
+main code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: color-mix(in oklab, var(--magenta) 12%, transparent);
+  border: 1px solid var(--glass-border);
+  border-radius: 5px;
+  padding: 1px 6px;
+}
+main .lede { font-size: 19px; color: var(--ink); }
+
+/* ---- About page blocks ------------------------------------------------ */
+main .role {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  padding: 20px 22px;
+  margin: 14px 0;
+}
+main .role h3 { margin-top: 0; }
+main .role .meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+  margin-bottom: 10px;
+}
+main .skill-cat { margin: 12px 0; }
+main .skill-cat h3 { color: var(--cyan); font-size: 15px; margin-bottom: 4px; }
+main .skill-cat p { font-family: var(--font-mono); font-size: 13px; color: var(--ink-mid); }
+
+/* ---- Project header (detail) tech stack chips ------------------------- */
+main header ul[aria-label="Tech stack"],
+main header ul[aria-label="Tags"] {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+main header ul[aria-label="Tech stack"] li,
+main header ul[aria-label="Tags"] li {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: var(--r-xs);
+  background: color-mix(in oklab, var(--magenta) 10%, transparent);
+  border: 1px solid var(--glass-border);
+  color: var(--ink-hi);
+}
+
+/* ---- Card grids (/projects, /blog) ----------------------------------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+.card-grid article {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  padding: 22px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.card-grid article:hover {
+  transform: translateY(-3px);
+  border-color: var(--glass-border-hi);
+  box-shadow: 0 12px 40px -16px color-mix(in oklab, var(--magenta) 45%, transparent);
+}
+.card-grid article > span,
+.card-grid article > time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.card-grid article h2 {
+  font-size: 20px;
+  margin: 10px 0;
+  border: none;
+  padding: 0;
+}
+.card-grid article h2 a { border: none; color: var(--ink-hi); }
+.card-grid article h2 a:hover { color: var(--pink-soft); }
+.card-grid article p { font-size: 14px; color: var(--ink-mid); }
+.card-grid article ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 0;
+}
+.card-grid article ul li {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: var(--r-xs);
+  background: color-mix(in oklab, var(--cyan) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--cyan) 28%, transparent);
+  color: var(--ink-hi);
+  margin: 0;
+}
+
+/* Category filter buttons (/projects) */
+nav[aria-label="Filter by category"] {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+nav[aria-label="Filter by category"] button {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 7px 14px;
+  border-radius: var(--r-sm);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--ink-mid);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+nav[aria-label="Filter by category"] button:hover {
+  color: var(--ink-hi);
+  border-color: var(--glass-border-hi);
+}
+
+/* ---- Footer ----------------------------------------------------------- */
+body > footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+  border-top: 1px solid var(--glass-border);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+}
+
+/* ---- Detail page back link ------------------------------------------- */
+main article > footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--glass-border);
+}

@@ -1,0 +1,38 @@
+---
+import { POSTS } from './data.js';
+
+const fmt = (d: string | Date) =>
+  new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+<section id="blog" class="sec sec-blog">
+  <div class="shell">
+    <header class="sec-head">
+      <div>
+        <div class="kicker">WRITING <span class="kana" style="margin-left:8px">文章</span></div>
+        <h2 class="sec-title">Notes from the <span class="neon-violet">night shift</span>.</h2>
+        <p class="sec-lede">
+          Practical notes on geospatial tooling, AI workflows, and turning ambiguous work into systems.
+        </p>
+      </div>
+      <a class="sec-all" href="/blog">All posts <span class="btn-arrow">→</span></a>
+    </header>
+
+    <div class="post-grid">
+      {POSTS.map((p, i) => (
+        <a class={`post-card glass rise-${Math.min(i + 2, 5)}`} href={`/blog/${p.slug}`}>
+          <div class="post-meta">
+            <span class="kicker">{fmt(p.date)}</span>
+            <span class="dot-sep">·</span>
+            <span class="kicker">{p.readMin} min read</span>
+          </div>
+          <h3 class="post-title">{p.title}</h3>
+          <p class="post-summary">{p.summary}</p>
+          <div class="post-tags">
+            {p.tags.map((t) => <span class="tag">#{t}</span>)}
+          </div>
+          <div class="post-arrow">→</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

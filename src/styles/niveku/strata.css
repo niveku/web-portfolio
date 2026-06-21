@@ -178,6 +178,17 @@
 .strata-depth { display: none; }
 
 .strata-layer.is-active .strata-detail { opacity: 1; padding-top: 4px; }
+
+/* CSS-only reveal (no JS): hover or keyboard focus expands the bed log. */
+.strata-layer:hover,
+.strata-layer:focus-within { grid-template-rows: auto 1fr; }
+.strata-layer:hover > .strata-detail,
+.strata-layer:focus-within > .strata-detail { padding-bottom: 22px; }
+.strata-layer:hover .strata-bed,
+.strata-layer:focus-within .strata-bed { border-bottom: 1px dashed color-mix(in oklab, var(--layer-accent) 40%, transparent); }
+.strata-layer:hover .strata-detail,
+.strata-layer:focus-within .strata-detail { opacity: 1; padding-top: 4px; }
+.strata-layer:focus-visible { outline: 2px solid var(--layer-accent); outline-offset: -2px; border-radius: 4px; }
 .strata-narr {
   font-size: 14px;
   line-height: 1.55;

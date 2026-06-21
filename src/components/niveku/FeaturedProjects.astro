@@ -1,0 +1,75 @@
+---
+import { PROJECTS } from './data.js';
+
+const accentVar: Record<string, string> = {
+  magenta: 'oklch(0.72 0.25 340)',
+  violet: 'oklch(0.72 0.20 300)',
+  cyan: 'oklch(0.85 0.14 200)',
+  amber: 'oklch(0.82 0.15 75)',
+};
+
+const featured = PROJECTS.filter((p) => p.featured);
+const rest = PROJECTS.filter((p) => !p.featured);
+---
+<section id="projects" class="sec sec-projects">
+  <div class="shell">
+    <header class="sec-head">
+      <div>
+        <div class="kicker">SELECTED WORK <span class="kana" style="margin-left:8px">実績</span></div>
+        <h2 class="sec-title">
+          Spatial &amp; data systems that <span class="neon-magenta">shipped</span>.
+        </h2>
+        <p class="sec-lede">
+          Geospatial data engineering — raster and vector, spatial ETL, GIS for
+          institutions — and AWS data pipelines, each with a defined role, an
+          outcome, and a tradeoff I'd explain out loud.
+        </p>
+      </div>
+      <a class="sec-all" href="/projects">All projects <span class="btn-arrow">→</span></a>
+    </header>
+
+    <div class="proj-grid">
+      {featured.map((p, i) => (
+        <article class={`proj-card glass rise-${Math.min(i + 2, 5)}`} style={`--accent: ${accentVar[p.accent]}`}>
+          <div class="proj-head">
+            <div class="proj-cat"><span class="kicker">{p.category}</span></div>
+            <div class="proj-date">{p.date}</div>
+          </div>
+          <h3 class="proj-title">
+            {p.title}
+            <span class="proj-subtitle">{p.subtitle}</span>
+          </h3>
+          <p class="proj-summary">{p.summary}</p>
+          {p.metric && (
+            <div class="proj-metric">
+              <span class="proj-metric-v">{p.metric.value}</span>
+              <span class="proj-metric-l">{p.metric.label}</span>
+            </div>
+          )}
+          <div class="proj-stack">
+            {p.stack.map((s) => <span class="chip">{s}</span>)}
+          </div>
+          <div class="proj-foot">
+            <span class="proj-role">{p.role}</span>
+            <a class="proj-link" href={`/projects/${p.slug}`}>case study <span class="btn-arrow">→</span></a>
+          </div>
+          <div class="proj-glow" aria-hidden="true"></div>
+        </article>
+      ))}
+    </div>
+
+    <div class="proj-mini-grid">
+      {rest.map((p) => (
+        <a href={`/projects/${p.slug}`} class="proj-mini glass" style={`--accent: ${accentVar[p.accent]}`}>
+          <div class="proj-mini-head">
+            <span class="kicker">{p.category}</span>
+            <span class="proj-date">{p.date}</span>
+          </div>
+          <div class="proj-mini-title">{p.title}</div>
+          <div class="proj-mini-sub">{p.subtitle}</div>
+          <div class="proj-mini-arrow">→</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

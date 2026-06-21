@@ -7,15 +7,15 @@ stack: ["AWS", "Python", "SQL", "PySpark", "GitHub Actions", "SonarQube"]
 featured: false
 ---
 
-## Problem
+## The problem: distribution data at operational scale
 
-Coca-Cola Chile's distribution and logistics operation generated data across production, transport, stock, losses, and damage — at operational scale. The data needed to flow reliably into analytical systems, with strong quality guarantees before any output reached client-facing dashboards.
+Coca-Cola Chile's distribution and logistics operation generated data across distribution, transport, and stock — at operational scale. The data needed to flow reliably into analytical systems, with strong quality guarantees before any output reached client-facing dashboards.
 
-## My Role
+## My role: data engineer with direct client work
 
 Technical contributor with direct client interaction. I handled ETL development, data modeling, traceability work, requirement refinement, and issue resolution. I also participated in quality-gate workflows — coverage checks, Sonar analysis, and benchmark comparisons before delivery.
 
-## What I Built
+## What I built: quality-gated ETL flows
 
 - ETL flows processing distribution and logistics data across multiple operational dimensions.
 - Data modeling for stock, transport, and loss tracking.
@@ -23,6 +23,6 @@ Technical contributor with direct client interaction. I handled ETL development,
 - Quality gates: unit test coverage, SonarQube analysis, and benchmark validation runs before each delivery.
 - Client communication: translating ambiguous business requirements into implementation specs and reporting back on tradeoffs.
 
-## Outcome
+## Outcome: technical rigor with stakeholder transparency
 
 A delivery model that combined technical rigor (quality gates, coverage, Sonar) with stakeholder transparency. Working directly with the client required handling ambiguity in real time — converting verbal requirements into actionable specs on short cycles.

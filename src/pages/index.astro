@@ -1,16 +1,45 @@
 ---
 // Niveku home — Yofukashi-inspired neon portfolio.
 // Standalone page (does NOT use BaseLayout): it ships its own nav/footer and
-// dark design tokens. The interactive UI is a single React island, server-
-// rendered for SEO and hydrated on load.
+// dark design tokens. Static sections are plain Astro (zero JS); only the
+// HeroGrid map (client:idle) and the AboutStrip terminal (client:visible)
+// hydrate. Contours are precomputed here at build time.
 import '../styles/niveku/tokens.css';
 import '../styles/niveku/layout.css';
 import '../styles/niveku/strata.css';
-import App from '../components/niveku/App.jsx';
 
-const title = 'Niveku — Kevin Henao · data, gis, ai automation';
+import Seo from '../components/seo/Seo.astro';
+import { personSchema, websiteSchema, profilePageSchema } from '../lib/seo';
+import { career } from '../data/career';
+
+import Nav from '../components/niveku/Nav.astro';
+import HeroGrid from '../components/niveku/HeroGrid.jsx';
+import Strata from '../components/niveku/Strata.astro';
+import FeaturedProjects from '../components/niveku/FeaturedProjects.astro';
+import AboutStrip from '../components/niveku/AboutStrip.astro';
+import BlogStrip from '../components/niveku/BlogStrip.astro';
+import Contact from '../components/niveku/Contact.astro';
+import Footer from '../components/niveku/Footer.astro';
+import { buildContours } from '../components/niveku/contours.js';
+
+// Build-time: generate the topographic contours once (deterministic, seed 42)
+// so no visitor's browser runs the noise + marching-squares loop.
+const contours = buildContours({ width: 100, height: 100, levels: 22, seed: 42 });
+
+const title = `${career.identity.displayName} — ${career.identity.positioning.lead} · Niveku`;
+// Distinct from career.identity.tagline (used as Person.description in JSON-LD)
+// so AI engines get two complementary citable sentences.
 const description =
-  'Geoscientist turned data & GIS engineer. Spatial workflows, AWS pipelines, and AI automation — from Bogotá, remote-first.';
+  'Geospatial data engineer and geoscientist — 8+ years building spatial data pipelines, GIS systems institutions actually use, and AWS data infrastructure. Bogotá, remote-first.';
+
+const fontHref =
+  'https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
+
+const schemas = [
+  personSchema(Astro.site),
+  websiteSchema(Astro.site),
+  profilePageSchema(Astro.site, new URL(Astro.url.pathname, Astro.site ?? 'https://niveku.vercel.app')),
+];
 ---
 
 <!doctype html>
@@ -18,22 +47,30 @@ const description =
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <Seo title={title} description={description} type="profile" schemas={schemas} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
+    <!-- Fonts: load non-render-blocking (preload as style, swap to stylesheet) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="style" href={fontHref} onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href={fontHref} /></noscript>
   </head>
   <body>
     <div class="city-bg"></div>
     <div class="city-grain"></div>
     <div class="city-scanline"></div>
 
-    <App client:load />
+    <Nav />
+    <main id="top">
+      <HeroGrid client:idle contours={contours} />
+      <Strata />
+      <FeaturedProjects />
+      <AboutStrip />
+      <BlogStrip />
+      <Contact />
+    </main>
+    <Footer />
   </body>
 </html>

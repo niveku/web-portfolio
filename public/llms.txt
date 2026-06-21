@@ -1,0 +1,34 @@
+# Kevin Henao — Geospatial Data Engineer
+
+> Geospatial data engineer and geoscientist with 8+ years building spatial data systems end-to-end — GIS and ArcGIS/QGIS workflows, Python/GeoPandas applications, and production AWS data pipelines (Lambda, Glue, Step Functions, Textract). Based in Bogotá, Colombia; remote-first. BSc Geosciences (Universidad de los Andes), English C2, co-author of an SPE paper at ADIPEC 2025.
+
+This is the personal portfolio of Kevin Henao (handle: "niveku"). The site is a static Astro site documenting his geospatial data engineering work, projects, and writing.
+
+## Positioning
+- Primary: Geospatial Data Engineer (GIS + Python + AWS + spatial data pipelines)
+- Secondary: Data Engineer (geospatial/GIS edge), GIS Python Developer, Technical Product Operator, AI workflow & automation (private practice on the Claude/Anthropic stack)
+
+## Pages
+- [Home](https://niveku.vercel.app/): overview, selected work, career cross-section, contact
+- [About](https://niveku.vercel.app/about): full background, experience timeline, skills, education, certifications
+- [Projects](https://niveku.vercel.app/projects): case studies across geospatial, data engineering, and AI/automation
+- [Blog](https://niveku.vercel.app/blog): notes on tooling, AI workflows, and turning ambiguous work into systems
+- [Contact](https://niveku.vercel.app/contact): how to reach Kevin
+
+## Selected work
+- AB InBev — invoice-PDF automation (acting architect): serverless AWS pipeline (Textract, Lambda, Step Functions) normalizing 30–40 supplier formats
+- Casaideas — SAP-to-cloud data pipeline (AWS Glue, PySpark, S3) for a LATAM retailer
+- Coca-Cola Chile — distribution/logistics ETL under quality-gated DevOps
+- DIMAR (Colombian Maritime Authority) — COVID geospatial monitoring workflow (ArcGIS Online, Survey123, GeoPandas) and the open-source ViENOS oceanographic dashboard (Python/Dash)
+- Fura — 3D geological model of the Coscuez emerald deposit and cartographic reporting infrastructure (QGIS, Leapfrog, Datamine)
+
+## Background
+- Current role: Geoscience Software Specialist at Imaged Reality (UK, remote), working on the Stratbox geological-software platform
+- Education: BSc Geosciences, Universidad de los Andes (GPA 4.12/5, "Quiero Estudiar" scholarship); Data Science (DS4A / Correlation One)
+- Languages: Spanish (native), English (C2, EF SET certified)
+- Credentials: Colombian Professional Geology License (CPG); ACGGP member
+- Publication: co-author, "Automating Core Data Integration: Insights from the Volve Field Case Study", ADIPEC 2025 (SPE OnePetro D041S138R004)
+
+## Links
+- GitHub: https://github.com/niveku
+- LinkedIn: https://www.linkedin.com/in/kevinhenaolopez

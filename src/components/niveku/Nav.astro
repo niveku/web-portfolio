@@ -1,0 +1,78 @@
+---
+import Icon from './Icon.astro';
+import { career } from '../../data/career';
+
+const gh = career.identity.socials.find((s) => s.type === 'github')!.url;
+const li = career.identity.socials.find((s) => s.type === 'linkedin')!.url;
+---
+<nav class="nk-nav glass">
+  <a href="#top" class="nk-logo">
+    <span class="nk-logo-mark" aria-hidden="true">
+      <svg class="logo-globe" viewBox="-16 -16 32 32" width="28" height="28">
+        <defs>
+          <clipPath id="globe-clip"><circle r="14" cx="0" cy="0" /></clipPath>
+          <radialGradient id="globe-fill" cx="34%" cy="28%" r="82%">
+            <stop offset="0%" stop-color="var(--cyan)" stop-opacity="0.28" />
+            <stop offset="55%" stop-color="var(--violet)" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="var(--magenta)" stop-opacity="0.05" />
+          </radialGradient>
+          <radialGradient id="globe-rim" cx="50%" cy="50%" r="50%">
+            <stop offset="78%" stop-color="transparent" />
+            <stop offset="100%" stop-color="var(--magenta)" stop-opacity="0.85" />
+          </radialGradient>
+          <radialGradient id="globe-shade" cx="74%" cy="74%" r="60%">
+            <stop offset="0%" stop-color="#000" stop-opacity="0.35" />
+            <stop offset="100%" stop-color="#000" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <circle r="14" cx="0" cy="0" fill="url(#globe-fill)" />
+        <circle r="14" cx="0" cy="0" fill="url(#globe-shade)" />
+        <g clip-path="url(#globe-clip)">
+          <g fill="none" stroke="var(--cyan)" stroke-width="0.4">
+            <ellipse cx="0" cy="-10" rx="9.8" ry="1.2" stroke-opacity="0.32" />
+            <ellipse cx="0" cy="-6" rx="12.7" ry="2.1" stroke-opacity="0.45" />
+            <ellipse cx="0" cy="-2" rx="13.85" ry="2.7" stroke-opacity="0.55" />
+            <ellipse cx="0" cy="2" rx="13.85" ry="2.7" stroke-opacity="0.55" />
+            <ellipse cx="0" cy="6" rx="12.7" ry="2.1" stroke-opacity="0.45" />
+            <ellipse cx="0" cy="10" rx="9.8" ry="1.2" stroke-opacity="0.32" />
+          </g>
+          <ellipse cx="0" cy="0" rx="14" ry="3.2" fill="none" stroke="var(--cyan)" stroke-opacity="0.72" stroke-width="0.5" />
+          {[0, 1, 2, 3].map((i) => (
+            <ellipse class="globe-meridian" cx="0" cy="0" ry="14" rx="14" fill="none" stroke="var(--magenta)" stroke-width="0.55">
+              <animate attributeName="rx" values="14;0.1;14" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1" dur="9s" begin={`${-i * 2.25}s`} repeatCount="indefinite" />
+              <animate attributeName="stroke-opacity" values="0.8;0.15;0.8" keyTimes="0;0.5;1" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1" dur="9s" begin={`${-i * 2.25}s`} repeatCount="indefinite" />
+            </ellipse>
+          ))}
+          <circle cx="0" cy="-14" r="0.9" fill="var(--cyan)" opacity="0.85" />
+          <circle cx="0" cy="14" r="0.9" fill="var(--cyan)" opacity="0.85" />
+        </g>
+        <circle r="14" cx="0" cy="0" fill="none" stroke="var(--magenta)" stroke-width="0.9" opacity="0.95" />
+        <circle r="14" cx="0" cy="0" fill="url(#globe-rim)" />
+        <g class="globe-ping">
+          <circle cx="5" cy="-3" r="1.1" fill="var(--pink-soft)" />
+          <circle cx="5" cy="-3" r="1.1" fill="none" stroke="var(--pink-soft)" stroke-width="0.5">
+            <animate attributeName="r" values="1.1;3.4;1.1" dur="2.4s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.95;0;0.95" dur="2.4s" repeatCount="indefinite" />
+          </circle>
+        </g>
+      </svg>
+    </span>
+    <span class="nk-logo-text">
+      <span class="neon-magenta">niveku</span>
+      <span class="kana">二ベク</span>
+    </span>
+  </a>
+  <ul class="nk-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#strata">Strata</a></li>
+    <li><a href="#blog">Writing</a></li>
+    <li><a href="#about">About</a></li>
+    <li>
+      <a class="nk-icon" href={gh} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="github" /></a>
+    </li>
+    <li>
+      <a class="nk-icon" href={li} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+    </li>
+    <li><a href="#contact" class="cta">Contact <span class="btn-arrow">→</span></a></li>
+  </ul>
+</nav>

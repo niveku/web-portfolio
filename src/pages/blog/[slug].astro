@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { articleSchema, breadcrumbSchema } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -18,9 +19,25 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+
+const site = Astro.site ?? new URL('https://niveku.vercel.app');
+const url = new URL(Astro.url.pathname, site);
+const schemas = [
+  articleSchema(site, url, {
+    title: post.data.title,
+    description: post.data.summary,
+    date: post.data.date,
+    tags: post.data.tags,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: new URL('/', site) },
+    { name: 'Blog', url: new URL('/blog', site) },
+    { name: post.data.title, url },
+  ]),
+];
 ---
 
-<BaseLayout title={post.data.title} description={post.data.summary}>
+<BaseLayout title={post.data.title} description={post.data.summary} type="article" schemas={schemas}>
   <article>
     <header>
       <time datetime={post.data.date.toISOString()}>{formattedDate}</time>

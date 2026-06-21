@@ -1,0 +1,48 @@
+---
+/**
+ * Centralized <head> SEO: title, description, canonical, Open Graph, Twitter,
+ * and JSON-LD structured data. Drop inside <head>. Pass page-specific schemas
+ * (Person/WebSite/ProfilePage/Article/BreadcrumbList) via the `schemas` prop.
+ */
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute or site-relative OG/Twitter image. */
+  image?: string;
+  type?: 'website' | 'article' | 'profile';
+  schemas?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const { title, description, image = '/og.png', type = 'website', schemas = [], noindex = false } =
+  Astro.props;
+
+const site = Astro.site ?? new URL('https://niveku.vercel.app');
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL(image, site);
+const siteName = 'Niveku — Kevin Henao';
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical.href} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical.href} />
+<meta property="og:image" content={ogImage.href} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage.href} />
+
+<!-- JSON-LD structured data -->
+{schemas.map((schema) => (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

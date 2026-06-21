@@ -1,0 +1,145 @@
+---
+/* Career as a stratigraphic column — static; hover/focus reveals the log (CSS). */
+import StrataPattern from './StrataPattern.astro';
+
+const STRATA_ACCENT: Record<string, string> = {
+  magenta: 'oklch(0.80 0.20 340)',
+  violet: 'oklch(0.74 0.17 300)',
+  blue: 'oklch(0.72 0.16 262)',
+  cyan: 'oklch(0.82 0.13 200)',
+  amber: 'oklch(0.82 0.13 78)',
+};
+
+const STRATA = [
+  {
+    id: 'ai', era: 'AI · AUTOMATION', kana: '知能', formation: 'OpenClaw Fm.',
+    rock: 'conglomerate', rockLabel: 'Conglomerate', ageLabel: '2024 → now', thickness: 12, color: 'magenta',
+    lithology: ['Claude Code', 'MCPs', 'Skills', 'Agent workflows'],
+    events: ['Built OpenClaw — personal AI operating system', 'Random Forest facies classifier → SPE paper (ADIPEC 2025)', 'AI-assisted pipelines on Claude Code'],
+    narrative: 'Surface cover — poorly sorted, every older clast cemented together. The newest deposit sits on everything beneath it.',
+  },
+  {
+    id: 'data', era: 'DATA ENGINEERING', kana: '配管', formation: 'Pipeline Group',
+    rock: 'sandstone', rockLabel: 'Sandstone', ageLabel: '2021 → now', thickness: 20, color: 'violet',
+    lithology: ['AWS Lambda', 'Step Functions', 'Glue', 'S3', 'Athena', 'Redshift', 'Python', 'SQL'],
+    events: ['AB InBev — serverless invoice automation (acting architect)', 'Casaideas — SAP-to-cloud pipeline', 'Coca-Cola Chile — distribution data flow'],
+    narrative: 'Porous and permeable — data flows through it. Thick, well-bedded, the productive reservoir of the section.',
+  },
+  {
+    id: 'analytics', era: 'ANALYTICS · BI', kana: '分析', formation: 'Warehouse Member',
+    rock: 'limestone', rockLabel: 'Limestone', ageLabel: '2020 → 2022', thickness: 15, color: 'blue',
+    lithology: ['Power BI', 'DAX', 'SQL', 'Athena'],
+    events: ['Reporting & modeling layers over operational data', 'Self-serve dashboards for non-technical stakeholders'],
+    narrative: 'Structured, well-cemented beds — clean grain, predictable joints. Where messy data gets ordered into something legible.',
+  },
+  {
+    id: 'gis', era: 'GEOSPATIAL', kana: '地理', formation: 'Cartographic Beds',
+    rock: 'shale', rockLabel: 'Shale', ageLabel: '2018 → 2023', thickness: 20, color: 'cyan',
+    lithology: ['QGIS', 'GeoPandas', 'GDAL', 'PostGIS', 'ArcGIS', 'Survey123'],
+    events: ["DIMAR — COVID geospatial monitoring for a gov't agency", 'Fura — reporting & mapping infrastructure'],
+    narrative: 'Finely laminated — layer upon layer of maps. Operational GIS that institutions actually use, deposited slowly and precisely.',
+  },
+  {
+    id: 'geo', era: 'GEOSCIENCE', kana: '地質', formation: 'Andes Basement',
+    rock: 'basement', rockLabel: 'Crystalline basement', ageLabel: '2013 → 2020', thickness: 26, color: 'amber',
+    lithology: ['Field work', 'Stratigraphy', 'Geochemistry', 'Python', 'Leapfrog', 'Datamine'],
+    events: ['BSc Geosciences · Universidad de los Andes', 'Colombian Professional Geology License (CPG)', 'Field geology, geochemistry, and 3D ore modeling'],
+    narrative: 'Crystalline bedrock — the deformed, intruded foundation. Rocks and stratigraphy: where all the domain intuition was forged.',
+  },
+];
+---
+<section id="strata" class="sec sec-strata">
+  <div class="shell">
+    <header class="sec-head strata-head">
+      <div>
+        <div class="kicker">CAREER CROSS-SECTION <span class="kana" style="margin-left:8px">断面図</span></div>
+        <h2 class="sec-title">
+          Read me like a <span class="neon-amber">stratigraphic column</span>.
+        </h2>
+        <p class="sec-lede">
+          Old habits: I still think in formations and ages. Here's my stack as a
+          stratigraphic column — youngest at the surface, basement at depth. Hover
+          or focus a bed to read the log.
+        </p>
+      </div>
+      <div class="strata-legend">
+        <div class="kicker strata-legend-title">LITHOLOGY KEY <span class="kana" style="margin-left:8px">凡例</span></div>
+        {STRATA.map((l) => (
+          <div class="strata-legend-row" style={`--layer-accent: ${STRATA_ACCENT[l.color]}`}>
+            <span class="strata-legend-box">
+              <StrataPattern rock={l.rock} color={l.color} idSuffix={`leg-${l.id}`} />
+            </span>
+            <span class="strata-legend-name">{l.rockLabel}</span>
+          </div>
+        ))}
+      </div>
+    </header>
+
+    <div class="strata-column glass">
+      <div class="strata-scale">
+        <div class="strata-scale-head">
+          <span class="kana">深度</span>
+          <span class="kicker">DEPTH / AGE</span>
+        </div>
+        <div class="strata-scale-ruler" aria-hidden="true">
+          {Array.from({ length: 11 }).map((_, i) => (
+            <div class={`strata-tick ${i % 5 === 0 ? 'strata-tick-maj' : ''}`}>
+              <span>{i === 0 ? 'SURFACE' : i === 10 ? 'BASEMENT' : ''}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="strata-beds">
+        {STRATA.map((layer) => (
+          <div
+            class="strata-layer"
+            tabindex="0"
+            style={`--layer-accent: ${STRATA_ACCENT[layer.color]}; --bed-h: ${54 + layer.thickness * 2}px`}
+          >
+            <div class="strata-bed">
+              <div class="strata-bed-pattern">
+                <StrataPattern rock={layer.rock} color={layer.color} idSuffix={layer.id} />
+              </div>
+              <div class="strata-bed-head">
+                <div class="strata-bed-meta">
+                  <span class="kicker strata-era">{layer.era}</span>
+                </div>
+                <h3 class="strata-formation">{layer.formation}</h3>
+                <div class="strata-rockline">
+                  <span class="strata-rock">{layer.rockLabel}</span>
+                  <span class="strata-dot">·</span>
+                  <span class="strata-age">{layer.ageLabel}</span>
+                </div>
+              </div>
+              <div class="strata-bed-right">
+                <div class="strata-lith">
+                  {layer.lithology.slice(0, 4).map((l) => <span class="chip chip-thin">{l}</span>)}
+                  {layer.lithology.length > 4 && (
+                    <span class="chip chip-thin chip-more">+{layer.lithology.length - 4}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div class="strata-detail">
+              <p class="strata-narr">{layer.narrative}</p>
+              <ul class="strata-events">
+                {layer.events.map((e) => <li>{e}</li>)}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="strata-footer">
+        <span class="kana" style="margin-right:10px">総合</span>
+        <span class="kicker">SUMMARY</span>
+        <span class="strata-footer-text">
+          8+ years shipping · 5 formations · one throughline: <em>turning ambiguous,
+          domain-heavy problems into working technical systems.</em>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

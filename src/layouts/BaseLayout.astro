@@ -1,13 +1,37 @@
 ---
 import '../styles/global.css';
+import '../styles/niveku/tokens.css';
+import '../styles/pages.css';
+import Seo from '../components/seo/Seo.astro';
+import { personSchema, websiteSchema } from '../lib/seo';
+import { career } from '../data/career';
+
+const fontHref =
+  'https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap';
 
 interface Props {
   title: string;
   description?: string;
+  type?: 'website' | 'article' | 'profile';
+  /** Page-specific JSON-LD, appended to the site-wide Person + WebSite graph. */
+  schemas?: Record<string, unknown>[];
+  image?: string;
 }
 
-const { title, description = 'Geoscientist turned data & GIS engineer. Building spatial workflows, AI tools, and automation systems.' } = Astro.props;
-const canonicalTitle = title === 'Home' ? 'Niveku' : `${title} — Niveku`;
+const {
+  title,
+  description = career.identity.tagline,
+  type = 'website',
+  schemas = [],
+  image,
+} = Astro.props;
+
+const canonicalTitle =
+  title === 'Home'
+    ? `${career.identity.displayName} — ${career.identity.positioning.lead}`
+    : `${title} — ${career.identity.displayName}`;
+
+const baseSchemas = [personSchema(Astro.site), websiteSchema(Astro.site)];
 ---
 
 <!doctype html>
@@ -15,9 +39,19 @@ const canonicalTitle = title === 'Home' ? 'Niveku' : `${title} — Niveku`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
-    <title>{canonicalTitle}</title>
+    <Seo
+      title={canonicalTitle}
+      description={description}
+      type={type}
+      image={image}
+      schemas={[...baseSchemas, ...schemas]}
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href={fontHref} onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href={fontHref} /></noscript>
   </head>
   <body>
     <header>
@@ -37,7 +71,10 @@ const canonicalTitle = title === 'Home' ? 'Niveku' : `${title} — Niveku`;
     </main>
 
     <footer>
-      <p>Kevin Henao &middot; Bogotá, Colombia &middot; Remote-first</p>
+      <p>
+        Kevin Henao &middot; {career.identity.positioning.lead} &middot; Bogotá, Colombia &middot;
+        Remote-first
+      </p>
     </footer>
   </body>
 </html>

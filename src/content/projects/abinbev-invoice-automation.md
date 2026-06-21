@@ -7,15 +7,15 @@ stack: ["AWS Lambda", "AWS Step Functions", "AWS Textract", "AWS SQS", "AWS Dyna
 featured: true
 ---
 
-## Problem
+## The problem: 30+ invoice formats, no automated path
 
 AB InBev received invoices from 30+ suppliers in highly variable PDF formats — different layouts, numeric conventions, partially handwritten fields, and inconsistent structure. Downstream business systems needed clean, normalized data. There was no automated path from raw PDFs to structured records.
 
-## My Role
+## My role: acting architect
 
 I was the implementation lead and acting architect in practice. I took the initial requirement — "extract and normalize invoice data" — and drove it from requirements clarification through architecture decisions, PDF readability improvements, cost-aware design, and testing-oriented delivery.
 
-## What I Built
+## What I built: a serverless AWS pipeline
 
 A fully serverless pipeline on AWS:
 
@@ -28,6 +28,6 @@ A fully serverless pipeline on AWS:
 
 I also ran a benchmark phase to quantify extraction accuracy across provider types before committing to the architecture, and designed preprocessing steps to improve PDF readability for challenging formats.
 
-## Outcome
+## Outcome: structured invoice data at scale
 
 The pipeline handled invoices from roughly 30–40 supplier types. The architecture was cost-aware (Textract is priced per page — batch sizing and preprocessing reduced unnecessary spend). Ambiguous formats were flagged for human review rather than silently dropped.

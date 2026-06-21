@@ -1,0 +1,49 @@
+---
+import Icon from './Icon.astro';
+import { career } from '../../data/career';
+
+const email = career.identity.email;
+const gh = career.identity.socials.find((s) => s.type === 'github')!;
+const li = career.identity.socials.find((s) => s.type === 'linkedin')!;
+---
+<section id="contact" class="sec sec-contact">
+  <div class="shell">
+    <div class="contact-card glass-strong">
+      <div class="contact-lead">
+        <div class="kicker">OPEN CHANNEL <span class="kana" style="margin-left:8px">連絡</span></div>
+        <h2 class="contact-title">
+          Got a <span class="neon-magenta">spatial or data</span> problem?<br />
+          Let's scope it.
+        </h2>
+        <p class="contact-para">
+          I take on work around <em>geospatial data</em>, <em>GIS systems</em>,
+          <em> AWS data pipelines</em>, and <em>AI-assisted workflows</em>.
+          Tell me what you're stuck on — I'll reply with a read on whether it's a
+          fit and what a first week would look like.
+        </p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn-neon primary big" href={`mailto:${email}`}>
+          <span>{email}</span>
+          <span class="btn-arrow">→</span>
+        </a>
+        <div class="contact-socials">
+          <a class="btn-neon ghost" href={gh.url} target="_blank" rel="noopener">
+            <Icon name="github" size={15} />
+            <span>github.com/{gh.handle}</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <a class="btn-neon ghost" href={li.url} target="_blank" rel="noopener">
+            <Icon name="linkedin" size={15} />
+            <span>in/{li.handle}</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+        <div class="contact-meta">
+          <div><span class="kicker">Timezone</span> GMT-5 · flexible</div>
+          <div><span class="kicker">Starts from</span> scoping call · no template decks</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

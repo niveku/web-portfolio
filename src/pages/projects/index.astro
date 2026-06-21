@@ -27,7 +27,7 @@ const categories = ['All', 'Geospatial', 'Data Engineering', 'AI/Automation'] as
       ))}
     </nav>
 
-    <div id="projects-grid">
+    <div id="projects-grid" class="card-grid">
       {sorted.map((project) => (
         <ProjectCard
           title={project.data.title}

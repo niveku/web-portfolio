@@ -224,6 +224,27 @@ body {
   100% { transform: scale(3); opacity: 0; }
 }
 
+/* Accessibility — respect prefers-reduced-motion.
+   Neutralize CSS animations/transitions, drop the moving grain/scanline
+   overlays, and force entrance (.rise-*) elements to their final state so no
+   content stays hidden. (JS islands also read matchMedia and skip their timers.) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .city-grain,
+  .city-scanline { display: none !important; }
+  .rise-1, .rise-2, .rise-3, .rise-4, .rise-5 {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Reveal on mount */
 .rise-1 { animation: rise 0.8s 0.05s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }
 .rise-2 { animation: rise 0.8s 0.15s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }

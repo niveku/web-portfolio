@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import { career } from '../../data/career';
+
+const gh = career.identity.socials.find((s) => s.type === 'github')!;
+const li = career.identity.socials.find((s) => s.type === 'linkedin')!;
+---
+<footer class="nk-foot">
+  <div class="shell nk-foot-grid">
+    <div>
+      <div class="kana" style="font-size:28px; color:var(--magenta)">二ベク</div>
+      <div class="kicker" style="margin-top:6px">NIVEKU · Kevin Henao</div>
+    </div>
+    <div class="nk-foot-meta">
+      <span>Geospatial Data Engineer</span>
+      <span class="dot-sep">·</span>
+      <span>Bogotá, Colombia</span>
+      <span class="dot-sep">·</span>
+      <span>Remote-first since 2021</span>
+      <span class="dot-sep">·</span>
+      <span>© 2026</span>
+    </div>
+    <div class="nk-foot-socials">
+      <a href={gh.url} target="_blank" rel="noopener" aria-label="GitHub">
+        <Icon name="github" size={18} />
+        <span>{gh.handle}</span>
+      </a>
+      <a href={li.url} target="_blank" rel="noopener" aria-label="LinkedIn">
+        <Icon name="linkedin" size={18} />
+        <span>{li.handle}</span>
+      </a>
+    </div>
+    <div class="nk-foot-note kana">夜更かしの詩</div>
+  </div>
+</footer>
