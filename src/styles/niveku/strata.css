@@ -1,0 +1,248 @@
+/* Strata section styles — stratigraphic column. */
+
+.sec-strata { padding: 56px 0 56px; }
+
+.strata-head { align-items: flex-start; }
+.strata-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--paper) 35%, transparent);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  min-width: 200px;
+}
+.strata-legend-title { margin-bottom: 2px; }
+.strata-legend-row { display: flex; align-items: center; gap: 11px; }
+.strata-legend-box {
+  width: 30px; height: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid color-mix(in oklab, var(--layer-accent) 45%, transparent);
+}
+.strata-legend-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+}
+
+.strata-column {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Left-side scale */
+.strata-scale {
+  padding: 20px 10px 20px 18px;
+  border-right: 1px dashed var(--glass-border);
+  background: color-mix(in oklab, var(--ink-hi) 3%, transparent);
+  display: flex;
+  flex-direction: column;
+}
+.strata-scale-head { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; }
+.strata-scale-head .kana { font-size: 14px; color: var(--amber); }
+.strata-scale-head .kicker { font-size: 9px; }
+.strata-scale-ruler {
+  flex: 1; display: flex; flex-direction: column; justify-content: space-between;
+  position: relative;
+  border-left: 1px solid var(--glass-border-hi);
+  margin-left: 6px;
+  padding-left: 10px;
+}
+.strata-tick {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ink-lo);
+  text-transform: uppercase;
+}
+.strata-tick::before {
+  content: "";
+  position: absolute;
+  left: -11px; top: 6px;
+  width: 6px; height: 1px;
+  background: var(--glass-border-hi);
+}
+.strata-tick-maj::before { width: 10px; left: -15px; background: var(--amber); }
+
+/* Bed stack */
+.strata-beds {
+  display: flex;
+  flex-direction: column;
+}
+
+.strata-layer {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 0fr;
+  transition: grid-template-rows .45s cubic-bezier(.2,.8,.2,1);
+  cursor: pointer;
+  border-bottom: 1px solid color-mix(in oklab, var(--layer-accent, var(--magenta)) 35%, transparent);
+}
+.strata-layer:last-child { border-bottom: none; }
+.strata-layer.is-active { grid-template-rows: auto 1fr; }
+.strata-layer.is-active > .strata-detail { padding-bottom: 22px; }
+.strata-layer.is-active .strata-bed { border-bottom: 1px dashed color-mix(in oklab, var(--layer-accent) 40%, transparent); }
+
+/* The bed row — pattern + metadata */
+.strata-bed {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  grid-template-areas:
+    "pattern head"
+    "pattern chips";
+  align-items: center;
+  padding: 20px 24px;
+  column-gap: 24px;
+  row-gap: 12px;
+  position: relative;
+  grid-template-rows: auto auto;
+}
+.strata-bed-pattern { grid-area: pattern; align-self: stretch; }
+.strata-bed-head    { grid-area: head; align-self: end; }
+.strata-bed-right   { grid-area: chips; align-self: start; }
+.strata-bed-pattern {
+  position: relative;
+  height: var(--bed-h, 80px);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--layer-accent) 45%, transparent);
+  box-shadow:
+    inset 0 0 24px color-mix(in oklab, var(--layer-accent) 18%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--ink-hi) 8%, transparent);
+}
+.strata-detail {
+  padding: 0 24px 0 198px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .3s, padding .3s;
+  min-height: 0;
+}
+.strata-pat { width: 100%; height: 100%; display: block; }
+
+.strata-bed-head { display: flex; flex-direction: column; gap: 5px; }
+.strata-bed-meta { display: flex; align-items: center; gap: 10px; }
+.strata-kana {
+  font-size: 13px;
+  color: var(--layer-accent);
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 calc(10px * var(--glow)) var(--layer-accent);
+}
+.strata-era { color: var(--layer-accent); font-size: 10px; }
+.strata-formation {
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink-hi);
+  line-height: 1.05;
+}
+.strata-rockline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.strata-rock { color: var(--layer-accent); opacity: 0.95; }
+.strata-dot { color: var(--ink-lo); }
+.strata-age { color: var(--ink-mid); }
+
+.strata-bed-right { display: flex; align-items: center; }
+.strata-lith { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-start; }
+
+.chip-thin {
+  padding: 3px 8px;
+  font-size: 10px;
+  border-radius: 4px;
+  background: color-mix(in oklab, var(--layer-accent) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--layer-accent) 35%, transparent);
+  color: var(--ink-hi);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.chip-more { opacity: 0.6; }
+
+/* Depth marker — left edge */
+.strata-depth { display: none; }
+
+.strata-layer.is-active .strata-detail { opacity: 1; padding-top: 4px; }
+.strata-narr {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-mid);
+  margin: 0 0 10px;
+  max-width: 56ch;
+  font-style: italic;
+}
+.strata-events {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 24px;
+}
+.strata-events li {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink);
+  padding-left: 16px;
+  position: relative;
+}
+.strata-events li::before {
+  content: "▸";
+  color: var(--layer-accent);
+  position: absolute;
+  left: 0;
+}
+
+/* Footer summary row */
+.strata-footer {
+  grid-column: 1 / -1;
+  padding: 14px 24px;
+  border-top: 1px dashed var(--glass-border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: color-mix(in oklab, var(--ink-hi) 3%, transparent);
+}
+.strata-footer-text {
+  font-size: 13px;
+  color: var(--ink-mid);
+  font-family: var(--font-mono);
+}
+.strata-footer-text em { font-style: normal; color: var(--pink-soft); }
+
+@media (max-width: 900px) {
+  .strata-column { grid-template-columns: 1fr; }
+  .strata-scale { display: none; }
+  .strata-bed {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "head"
+      "pattern"
+      "chips";
+    column-gap: 0;
+    row-gap: 12px;
+    padding: 16px 18px;
+  }
+  .strata-bed-pattern { height: 44px; }
+  .strata-detail { padding: 0 18px 14px 18px; }
+  .strata-events { grid-template-columns: 1fr; }
+  .strata-formation { font-size: 20px; }
+  .strata-head { flex-direction: column; }
+  .strata-legend { width: 100%; }
+}

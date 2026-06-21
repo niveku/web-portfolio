@@ -1,0 +1,244 @@
+/* Niveku — Yofukashi-inspired tokens
+   Paleta leída de la referencia: magenta profundo dominante, violeta eléctrico,
+   azul noche, acentos cálidos de ventana, base casi-negra azulada. */
+
+:root {
+  /* Base — bluish near-black */
+  --bg-0: oklch(0.08 0.04 275);
+  --bg-1: oklch(0.11 0.05 278);
+  --bg-2: oklch(0.14 0.06 282);
+  /* Translucent panel tone — used (mixed with transparent) by nav, legend,
+     about-meta and footer chips. Was referenced but never defined in the
+     source design, which silently dropped those layered backgrounds. */
+  --paper: var(--bg-1);
+
+  /* Core neon palette */
+  --magenta: oklch(0.68 0.27 340);     /* dominant */
+  --magenta-deep: oklch(0.52 0.25 335);
+  --violet: oklch(0.55 0.22 300);      /* eléctrico */
+  --violet-deep: oklch(0.38 0.18 295);
+  --cyan: oklch(0.82 0.14 200);        /* highlight frío */
+  --amber: oklch(0.80 0.15 75);        /* ventanas cálidas */
+  --pink-soft: oklch(0.78 0.14 345);
+
+  /* Text */
+  --ink-hi: oklch(0.96 0.02 310);
+  --ink: oklch(0.85 0.03 305);
+  --ink-mid: oklch(0.68 0.04 300);
+  --ink-lo: oklch(0.48 0.05 295);
+  --ink-dim: oklch(0.35 0.05 290);
+
+  /* Glass — translucent panels */
+  --glass-bg: color-mix(in oklab, var(--bg-1) 65%, transparent);
+  --glass-bg-strong: color-mix(in oklab, var(--bg-1) 85%, transparent);
+  --glass-border: color-mix(in oklab, var(--magenta) 18%, transparent);
+  --glass-border-hi: color-mix(in oklab, var(--magenta) 40%, transparent);
+  --glass-inset: inset 0 1px 0 color-mix(in oklab, white 8%, transparent);
+
+  /* Glow intensities (tweakable via JS) */
+  --glow: 1;
+
+  /* Type */
+  --font-display: 'Zen Kaku Gothic New', 'Inter', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Geist Mono', ui-monospace, monospace;
+  --font-jp: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+
+  /* Radii */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-0);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* City-at-night background: layered gradients + grain */
+.city-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-color: var(--bg-0);
+  background-image:
+    /* fade to deep black at the very top */
+    linear-gradient(to bottom, oklch(0.04 0.03 280) 0%, transparent 18%),
+    /* ventanas cálidas ambient */
+    radial-gradient(ellipse 60% 40% at 85% 70%, color-mix(in oklab, var(--amber) 40%, transparent), transparent 70%),
+    /* dominant glow arriba (centered above viewport so edges fade) */
+    radial-gradient(ellipse 90% 70% at 20% -20%, color-mix(in oklab, var(--magenta) 60%, transparent), transparent 65%),
+    /* violeta masa central */
+    radial-gradient(ellipse 70% 70% at 70% 30%, color-mix(in oklab, var(--violet) 55%, transparent), transparent 70%),
+    /* cyan accent puntual */
+    radial-gradient(circle at 10% 85%, color-mix(in oklab, var(--cyan) 30%, transparent), transparent 40%),
+    linear-gradient(180deg, var(--bg-0) 0%, oklch(0.04 0.04 280) 100%);
+}
+
+.city-grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.8  0 0 0 0 1  0 0 0 0.18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.city-scanline {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.08;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(255,255,255,0.6) 2px,
+    rgba(255,255,255,0.6) 3px
+  );
+}
+
+/* Glass panel base */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  box-shadow:
+    0 8px 40px -12px color-mix(in oklab, var(--magenta) 30%, transparent),
+    var(--glass-inset);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border-hi);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  box-shadow:
+    0 12px 50px -10px color-mix(in oklab, var(--magenta) 35%, transparent),
+    var(--glass-inset);
+}
+
+/* Neon text helpers — soft by default; reserve strong bloom for the hero name */
+.neon-magenta {
+  color: var(--pink-soft);
+  text-shadow: 0 0 calc(7px * var(--glow)) color-mix(in oklab, var(--magenta) 45%, transparent);
+}
+.neon-cyan {
+  color: var(--cyan);
+  text-shadow: 0 0 calc(7px * var(--glow)) color-mix(in oklab, var(--cyan) 38%, transparent);
+}
+.neon-violet {
+  color: oklch(0.82 0.14 295);
+  text-shadow: 0 0 calc(7px * var(--glow)) color-mix(in oklab, var(--violet) 38%, transparent);
+}
+.neon-amber {
+  color: oklch(0.85 0.13 80);
+  text-shadow: 0 0 calc(7px * var(--glow)) color-mix(in oklab, var(--amber) 36%, transparent);
+}
+/* Strong bloom — one hero element per page */
+.neon-strong {
+  text-shadow:
+    0 0 calc(9px * var(--glow)) color-mix(in oklab, var(--magenta) 80%, transparent),
+    0 0 calc(30px * var(--glow)) color-mix(in oklab, var(--magenta) 48%, transparent);
+}
+
+/* Utility type scales */
+.kicker {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--ink-mid);
+}
+
+.kana {
+  font-family: var(--font-jp);
+  color: color-mix(in oklab, var(--magenta) 70%, var(--ink-dim));
+  letter-spacing: 0.08em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--magenta) 30%, transparent);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--magenta) 50%, transparent);
+}
+
+/* Selection */
+::selection {
+  background: color-mix(in oklab, var(--magenta) 55%, transparent);
+  color: var(--ink-hi);
+}
+
+/* Animations */
+@keyframes neon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-dot {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* Reveal on mount */
+.rise-1 { animation: rise 0.8s 0.05s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+.rise-2 { animation: rise 0.8s 0.15s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+.rise-3 { animation: rise 0.8s 0.25s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+.rise-4 { animation: rise 0.8s 0.35s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+.rise-5 { animation: rise 0.8s 0.45s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+.rise-6 { animation: rise 0.8s 0.55s backwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* Layout */
+.shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 720px) {
+  .shell { padding: 0 18px; }
+}
