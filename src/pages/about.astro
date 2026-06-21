@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { career } from '../data/career';
 import { profilePageSchema, breadcrumbSchema } from '../lib/seo';
 
-const site = Astro.site ?? new URL('https://niveku.vercel.app');
+const site = Astro.site ?? new URL('https://portafolio-niveku.vercel.app');
 const url = new URL(Astro.url.pathname, site);
 const { identity, experience, skills, education, certifications, publications, softSkills } = career;
 

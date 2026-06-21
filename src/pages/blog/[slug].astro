@@ -20,7 +20,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
-const site = Astro.site ?? new URL('https://niveku.vercel.app');
+const site = Astro.site ?? new URL('https://portafolio-niveku.vercel.app');
 const url = new URL(Astro.url.pathname, site);
 const schemas = [
   articleSchema(site, url, {

@@ -7,7 +7,7 @@ import { career } from '../data/career';
 
 /** Normalize an Astro.site URL to a string without trailing slash. */
 function origin(site: URL | undefined): string {
-  const s = (site ?? new URL('https://niveku.vercel.app')).toString();
+  const s = (site ?? new URL('https://portafolio-niveku.vercel.app')).toString();
   return s.replace(/\/$/, '');
 }
 

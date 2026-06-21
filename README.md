@@ -1,6 +1,6 @@
 # niveku-portfolio
 
-![status](https://img.shields.io/badge/status-active-green) &nbsp; [niveku.vercel.app](https://niveku.vercel.app)
+![status](https://img.shields.io/badge/status-active-green) &nbsp; [portafolio-niveku.vercel.app](https://portafolio-niveku.vercel.app)
 
 ## About
 
@@ -41,7 +41,9 @@ Content schemas live in `src/content.config.ts`. Projects support an optional `r
 
 ## Deploy
 
-Auto-deploys from `main` to Vercel. Pull requests get preview URLs. Production alias: `niveku.vercel.app`.
+Auto-deploys from `main` to Vercel. Pull requests get preview URLs. The canonical
+site URL is derived from `VERCEL_PROJECT_PRODUCTION_URL` at build, so it tracks the
+project's production domain automatically (currently `portafolio-niveku.vercel.app`).
 
 ## License
 

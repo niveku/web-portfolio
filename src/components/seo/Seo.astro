@@ -17,7 +17,7 @@ interface Props {
 const { title, description, image = '/og.png', type = 'website', schemas = [], noindex = false } =
   Astro.props;
 
-const site = Astro.site ?? new URL('https://niveku.vercel.app');
+const site = Astro.site ?? new URL('https://portafolio-niveku.vercel.app');
 const canonical = new URL(Astro.url.pathname, site);
 const ogImage = new URL(image, site);
 const siteName = 'Niveku — Kevin Henao';

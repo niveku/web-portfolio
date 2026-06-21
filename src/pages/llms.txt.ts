@@ -1,6 +1,16 @@
-# Kevin Henao — Geospatial Data Engineer
+import type { APIRoute } from 'astro';
+import { career } from '../data/career';
 
-> Geospatial data engineer and geoscientist with 8+ years building spatial data systems end-to-end — GIS and ArcGIS/QGIS workflows, Python/GeoPandas applications, and production AWS data pipelines (Lambda, Glue, Step Functions, Textract). Based in Bogotá, Colombia; remote-first. BSc Geosciences (Universidad de los Andes), English C2, co-author of an SPE paper at ADIPEC 2025.
+// Dynamic llms.txt so page links always match the canonical site (Astro.site),
+// even after a domain change. Prerendered to /llms.txt at build.
+export const GET: APIRoute = ({ site }) => {
+  const base = (site ?? new URL('https://portafolio-niveku.vercel.app')).origin;
+  const gh = career.identity.socials.find((s) => s.type === 'github')?.url ?? 'https://github.com/niveku';
+  const li = career.identity.socials.find((s) => s.type === 'linkedin')?.url ?? 'https://www.linkedin.com/in/kevinhenaolopez';
+
+  const body = `# Kevin Henao — Geospatial Data Engineer
+
+> ${career.identity.summaries.geospatial.split('. ').slice(0, 2).join('. ')}.
 
 This is the personal portfolio of Kevin Henao (handle: "niveku"). The site is a static Astro site documenting his geospatial data engineering work, projects, and writing.
 
@@ -9,11 +19,11 @@ This is the personal portfolio of Kevin Henao (handle: "niveku"). The site is a 
 - Secondary: Data Engineer (geospatial/GIS edge), GIS Python Developer, Technical Product Operator, AI workflow & automation (private practice on the Claude/Anthropic stack)
 
 ## Pages
-- [Home](https://niveku.vercel.app/): overview, selected work, career cross-section, contact
-- [About](https://niveku.vercel.app/about): full background, experience timeline, skills, education, certifications
-- [Projects](https://niveku.vercel.app/projects): case studies across geospatial, data engineering, and AI/automation
-- [Blog](https://niveku.vercel.app/blog): notes on tooling, AI workflows, and turning ambiguous work into systems
-- [Contact](https://niveku.vercel.app/contact): how to reach Kevin
+- [Home](${base}/): overview, selected work, career cross-section, contact
+- [About](${base}/about): full background, experience timeline, skills, education, certifications
+- [Projects](${base}/projects): case studies across geospatial, data engineering, and AI/automation
+- [Blog](${base}/blog): notes on tooling, AI workflows, and turning ambiguous work into systems
+- [Contact](${base}/contact): how to reach Kevin
 
 ## Selected work
 - AB InBev — invoice-PDF automation (acting architect): serverless AWS pipeline (Textract, Lambda, Step Functions) normalizing 30–40 supplier formats
@@ -30,5 +40,11 @@ This is the personal portfolio of Kevin Henao (handle: "niveku"). The site is a 
 - Publication: co-author, "Automating Core Data Integration: Insights from the Volve Field Case Study", ADIPEC 2025 (SPE OnePetro D041S138R004)
 
 ## Links
-- GitHub: https://github.com/niveku
-- LinkedIn: https://www.linkedin.com/in/kevinhenaolopez
+- GitHub: ${gh}
+- LinkedIn: ${li}
+`;
+
+  return new Response(body, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+};
